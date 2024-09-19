@@ -1,0 +1,45 @@
+@use "@angular/material" as mat;
+
+// @use "../../../m3-theme.scss";
+
+// $my-app-theme: m3-theme.$light-theme;
+// $my-app-dark-theme: m3-theme.$dark-theme;
+
+// Define the theme object.
+$my-app-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+      use-system-variables: true,
+    ),
+    typography: (
+      use-system-variables: true,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+$my-app-dark-theme: mat.define-theme(
+  (
+    color: (
+      theme-type: dark,
+
+      primary: mat.$violet-palette,
+      tertiary: mat.$magenta-palette,
+      use-system-variables: true,
+    ),
+    typography: (
+      use-system-variables: true,
+    ),
+    density: (
+      scale: 0,
+    ),
+  )
+);
+
+// primary: mat.$magenta-palette,
+// tertiary: mat.$violet-palette,

@@ -1,1 +1,37 @@
-/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+@use "./styles/themes/all" as themes;
+@use "./styles/sizes";
+
+@include mat.core();
+
+:root {
+  // @include mat.all-component-themes($myapp-theme);
+
+  @include mat.core-theme(themes.$my-app-theme);
+  @include mat.button-theme(themes.$my-app-theme);
+  @include mat.icon-theme(themes.$my-app-theme);
+  @include mat.menu-theme(themes.$my-app-theme);
+  @include mat.form-field-theme(themes.$my-app-theme);
+  @include mat.input-theme(themes.$my-app-theme);
+
+  @include mat.typography-hierarchy(themes.$my-app-theme);
+
+  @include mat.system-level-colors(themes.$my-app-theme);
+  @include mat.system-level-typography(themes.$my-app-theme);
+}
+
+// @media (prefers-color-scheme: dark) {
+//   :root {
+//     @include mat.core-color(themes.$my-app-dark-theme);
+//     @include mat.button-color(themes.$my-app-dark-theme);
+//   }
+// }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
