@@ -1,0 +1,49 @@
+@let isMD = (isMD$ | async);
+
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="isMD ? 'navigation' : 'dialog'"
+    [mode]="isMD ? 'side' : 'over'"
+    [opened]="!isMD === false"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item href="#">Link 1</a>
+      <a mat-list-item href="#">Link 2</a>
+      <a mat-list-item href="#">Link 3</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      @if (!isMD) {
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      }
+
+      <app-logo />
+      <!-- <span class="spacer"></span> -->
+      @if(isMD){
+      <app-menu-toolbar />
+      <!-- <app-color-mode-change /> -->
+      }@else {
+      <!-- <app-actions-vert /> -->
+      }
+    </mat-toolbar>
+
+    <!-- Add Content Here -->
+    <div class="sidenav-scroll-wrapper">
+      <div class="sidenav-content">
+        <ng-content></ng-content>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

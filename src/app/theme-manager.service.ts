@@ -2,7 +2,19 @@ import { DOCUMENT } from '@angular/common';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { BrowserStorageService } from './browser-storage.service';
 
+//se utilizzo di rxjs
+// import { BehaviorSubject } from 'rxjs';
+
 const LOCAL_STORAGE_KEY = 'my-app';
+
+// ATTN!!! il nome deve corrispondere al bundleName
+// {
+//   "bundleName": "dark-theme",
+//   "inject": false,
+//   "input": "src/styles/themes/dark.scss"
+// }
+///////////////////////////////////////
+const BUNDLE_NAME_DARK_FILE = 'dark-theme.css';
 
 @Injectable({
   providedIn: 'root',
@@ -11,7 +23,10 @@ export class ThemeManager {
   private document = inject(DOCUMENT);
   private browserStorage = inject(BrowserStorageService);
   private _window = this.document.defaultView;
-  // isDark = signal(false);
+
+  /*---------- utilizzo rxjs ***************************/
+  // private _isDarkSub = new BehaviorSubject(false);
+  // isDark$ = this._isDarkSub.asObservable();
 
   currentTheme = signal<{ theme: string; isDark: boolean }>({
     theme: 'light',
@@ -82,6 +97,8 @@ export class ThemeManager {
       ) {
         this.document.documentElement.setAttribute('data-pkm-theme', 'dark');
         this.currentTheme.update((t) => ({ ...t, theme: theme, isDark: true }));
+        // utilizzo rxjs
+        // this._isDarkSub.next(true);
       } else {
         this.document.documentElement.setAttribute('data-pkm-theme', theme);
         this.currentTheme.update((t) => ({
@@ -89,6 +106,9 @@ export class ThemeManager {
           theme: theme,
           isDark: theme === 'dark',
         }));
+
+        // utilizzo rxjs
+        // this._isDarkSub.next(theme === 'dark');
       }
     }
 
@@ -98,8 +118,11 @@ export class ThemeManager {
   setMaterialTheme() {
     console.log('setMaterialTheme isDark', this.currentTheme().isDark);
     if (this.currentTheme().isDark) {
-      const href = 'dark-theme.css';
-      getLinkElementForKey('dark-theme').setAttribute('href', href);
+      // const href = BUNDLE_NAME_DARK_FILE;
+      getLinkElementForKey('dark-theme').setAttribute(
+        'href',
+        BUNDLE_NAME_DARK_FILE
+      );
       this.document.documentElement.classList.add('dark-theme');
     } else {
       this.removeStyle('dark-theme');

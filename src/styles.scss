@@ -1,11 +1,13 @@
 @use "@angular/material" as mat;
-@use "./styles/themes/all" as themes;
 @use "./styles/sizes";
+
+@use "./styles/themes/all" as themes;
 
 @include mat.core();
 
 :root {
-  // @include mat.all-component-themes($myapp-theme);
+  // @include mat.all-component-themes($my-app-theme);
+  --zizza-test: red;
 
   @include mat.core-theme(themes.$my-app-theme);
   @include mat.button-theme(themes.$my-app-theme);
@@ -14,11 +16,19 @@
   @include mat.form-field-theme(themes.$my-app-theme);
   @include mat.input-theme(themes.$my-app-theme);
 
+  @include mat.sidenav-theme(themes.$my-app-theme);
+  @include mat.toolbar-theme(themes.$my-app-theme);
+  @include mat.list-theme(themes.$my-app-theme);
+
   @include mat.typography-hierarchy(themes.$my-app-theme);
 
   @include mat.system-level-colors(themes.$my-app-theme);
   @include mat.system-level-typography(themes.$my-app-theme);
 }
+
+/*************************************************************
+Gestione statica del tema
+**************************************************************/
 
 // @media (prefers-color-scheme: dark) {
 //   :root {

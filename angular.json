@@ -58,7 +58,6 @@
             ],
             "styles": [
               "src/styles.scss",
-              "src/styles.scss",
               {
                 "bundleName": "dark-theme",
                 "inject": false,

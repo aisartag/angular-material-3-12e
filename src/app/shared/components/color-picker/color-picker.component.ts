@@ -9,7 +9,8 @@ import {
   applyTheme,
 } from '@material/material-color-utilities';
 
-const FALLBACK_COLOR = '#6750a4';
+// Se utilizzi m3-theme questo è il colore generatore;
+const FALLBACK_COLOR = '#f97316'; // tw orange-500
 
 @Component({
   selector: 'app-color-picker',

@@ -1,45 +1,50 @@
 @use "@angular/material" as mat;
 
-// @use "../../../m3-theme.scss";
+/*************************************************************************
+M3-THEME
+tema generato con ng g @angular/material:m3-theme
+**************************************************************************/
+@use "../../../m3-theme.scss";
+$my-app-theme: m3-theme.$light-theme;
+$my-app-dark-theme: m3-theme.$dark-theme;
 
-// $my-app-theme: m3-theme.$light-theme;
-// $my-app-dark-theme: m3-theme.$dark-theme;
-
+/********************************************************************************
+THEME CUSTOM
+Setting custom theme with use-system-variables: true
+Questo flag consente di variare dinamicamente il teme
+@material/material-color-utilities è il package necessario
+********************************************************************************/
 // Define the theme object.
-$my-app-theme: mat.define-theme(
-  (
-    color: (
-      theme-type: light,
-      primary: mat.$azure-palette,
-      tertiary: mat.$blue-palette,
-      use-system-variables: true,
-    ),
-    typography: (
-      use-system-variables: true,
-    ),
-    density: (
-      scale: 0,
-    ),
-  )
-);
+// $my-app-theme: mat.define-theme(
+//   (
+//     color: (
+//       theme-type: light,
+//       primary: mat.$azure-palette,
+//       tertiary: mat.$blue-palette,
+//       use-system-variables: true,
+//     ),
+//     typography: (
+//       use-system-variables: true,
+//     ),
+//     density: (
+//       scale: 0,
+//     ),
+//   )
+// );
 
-$my-app-dark-theme: mat.define-theme(
-  (
-    color: (
-      theme-type: dark,
-
-      primary: mat.$violet-palette,
-      tertiary: mat.$magenta-palette,
-      use-system-variables: true,
-    ),
-    typography: (
-      use-system-variables: true,
-    ),
-    density: (
-      scale: 0,
-    ),
-  )
-);
-
-// primary: mat.$magenta-palette,
-// tertiary: mat.$violet-palette,
+// $my-app-dark-theme: mat.define-theme(
+//   (
+//     color: (
+//       theme-type: dark,
+//       primary: mat.$magenta-palette,
+//       tertiary: mat.$violet-palette,
+//       use-system-variables: true,
+//     ),
+//     typography: (
+//       use-system-variables: true,
+//     ),
+//     density: (
+//       scale: 0,
+//     ),
+//   )
+// );

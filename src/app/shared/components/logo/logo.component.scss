@@ -1,0 +1,31 @@
+:host {
+  flex: 1 1 0%;
+  // border: 1px solid red;
+  text-align: center;
+}
+
+// .logos {
+//   stroke {
+//     color: red;
+//   }
+// }
+
+a {
+  display: inline-block;
+  color: blue;
+
+  // .logos {
+  //   color: black;
+  // }
+}
+
+// .svg-container {
+//   fill: black;
+// }
+
+@media (min-width: "768px") {
+  :host {
+    text-align: start;
+  }
+}
+// var(--sys-on-background);
