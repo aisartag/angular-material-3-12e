@@ -17,5 +17,6 @@ export class SideLeftComponent {
     { routerLink: 'signals-intro', title: 'Signals Intro' },
     { routerLink: 'todos-list', title: 'Todos List' },
     { routerLink: 'todos-list-http', title: 'Todos List Http' },
+    { routerLink: 'things', title: 'Things' },
   ];
 }

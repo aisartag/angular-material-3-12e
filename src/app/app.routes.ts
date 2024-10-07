@@ -58,6 +58,14 @@ export const routes: Routes = [
       ).then((c) => c.TodosListHttpComponent),
   },
 
+  {
+    path: 'things',
+    loadComponent: () =>
+      import('./features/things/things.component').then(
+        (c) => c.ThingsComponent
+      ),
+  },
+
   { path: '**', component: PageNotFoundComponent },
 ];
 
