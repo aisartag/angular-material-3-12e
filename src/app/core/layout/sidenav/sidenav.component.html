@@ -1,24 +1,19 @@
-@let isMD = (isMD$ | async);
+@let isSmall = (isSmall$ | async);
 
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav
     #drawer
     class="sidenav"
     fixedInViewport
-    [attr.role]="isMD ? 'navigation' : 'dialog'"
-    [mode]="isMD ? 'side' : 'over'"
-    [opened]="!isMD === false"
+    [attr.role]="!isSmall ? 'navigation' : 'dialog'"
+    [mode]="!isSmall ? 'side' : 'over'"
+    [opened]="isSmall === false"
   >
-    <mat-toolbar>Menu</mat-toolbar>
-    <mat-nav-list>
-      <a mat-list-item href="#">Link 1</a>
-      <a mat-list-item href="#">Link 2</a>
-      <a mat-list-item href="#">Link 3</a>
-    </mat-nav-list>
+    <app-side-left />
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      @if (!isMD) {
+      @if (isSmall) {
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -30,12 +25,12 @@
       }
 
       <app-logo />
+      <!-- {{ isSmall }} -->
       <!-- <span class="spacer"></span> -->
-      @if(isMD){
-      <app-menu-toolbar />
-      <!-- <app-color-mode-change /> -->
+      @if(!isSmall){
+      <app-actions-toolbar />
       }@else {
-      <!-- <app-actions-vert /> -->
+      <app-side-right />
       }
     </mat-toolbar>
 

@@ -16,6 +16,8 @@ const LOCAL_STORAGE_KEY = 'my-app';
 ///////////////////////////////////////
 const BUNDLE_NAME_DARK_FILE = 'dark-theme.css';
 
+export type PreferredType = 'light' | 'dark' | 'auto';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -77,7 +79,7 @@ export class ThemeManager {
     this.browserStorage.set(LOCAL_STORAGE_KEY, JSON.stringify(meta));
   };
 
-  getPreferredTheme = (): 'dark' | 'light' | 'auto' => {
+  getPreferredTheme = (): PreferredType => {
     const storedTheme = this.getStoredTheme();
     console.log('gerStoredTheme', storedTheme);
     if (storedTheme) {

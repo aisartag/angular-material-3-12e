@@ -1,5 +1,6 @@
 .sidenav-container {
   height: 100%;
+  // border: 1px solid yellow;
 
   .sidenav {
     width: 240px;
@@ -32,6 +33,7 @@ mat-sidenav-content {
 
 .sidenav-content {
   max-height: 100%;
+  // height: 100%;
   overflow-y: auto;
   padding: 16px;
   box-sizing: border-box;

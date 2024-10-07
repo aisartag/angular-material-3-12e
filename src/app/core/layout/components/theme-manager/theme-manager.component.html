@@ -1,0 +1,37 @@
+<button
+  mat-icon-button
+  [matMenuTriggerFor]="menu"
+  aria-label="Menu switcher dark mode"
+>
+  @if(isDark()){
+  <mat-icon>dark_mode</mat-icon>
+  }@else {
+  <mat-icon>light_mode</mat-icon>
+  }
+</button>
+<mat-menu #menu="matMenu">
+  <button
+    mat-menu-item
+    (click)="changeTheme('light')"
+    [disabled]="theme.currentTheme().theme === 'light'"
+  >
+    <mat-icon>light_mode</mat-icon>
+    <span>Light</span>
+  </button>
+  <button
+    mat-menu-item
+    (click)="changeTheme('dark')"
+    [disabled]="theme.currentTheme().theme === 'dark'"
+  >
+    <mat-icon>dark_mode</mat-icon>
+    <span>Dark</span>
+  </button>
+  <button
+    mat-menu-item
+    (click)="changeTheme('auto')"
+    [disabled]="theme.currentTheme().theme === 'auto'"
+  >
+    <mat-icon>monitor</mat-icon>
+    <span>Systen</span>
+  </button>
+</mat-menu>

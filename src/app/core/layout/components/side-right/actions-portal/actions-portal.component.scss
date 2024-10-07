@@ -1,0 +1,40 @@
+:host {
+  background-color: var(--sys-primary-container);
+  color: var(--sys-on-primary-container);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+
+  .btn-portal-close {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+
+  .actions-portal-content {
+    .mat-divider {
+      margin-inline: 1.5rem;
+    }
+
+    .list-actions {
+      // border: 1px solid red;
+      margin-right: 3rem;
+    }
+
+    .mat-mdc-form-field {
+      padding-top: 2rem;
+      padding-inline: 1.5rem;
+    }
+
+    .select-align-value {
+      // border: 1px solid red;
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: end;
+      gap: 1rem;
+    }
+  }
+}
+
+:host-context(.dark-theme) {
+  box-shadow: inset 0 1px 0 0 #ffffff0d;
+}

@@ -8,11 +8,14 @@ import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-// import { ColorModeChangeComponent } from '../components/color-mode-change/color-mode-change.component';
 
 import { LogoComponent } from '../../../shared/components/logo/logo.component';
-import { MenuToolbarComponent } from '../components/menu-toolbar/menu-toolbar.component';
-// import { ActionsVertComponent } from '../components/actions-vert/actions-vert.component';
+
+import { ThemeManagerComponent } from '../components/theme-manager/theme-manager.component';
+import { SideRightComponent } from '../components/side-right/side-right.component';
+import { ActionsToolbarComponent } from '../components/actions-toolbar/actions-toolbar.component';
+import { SideLeftComponent } from '../components/side-left/side-left.component';
+import { MIN_WIDTH_SCREEN } from '../../../shared/utils/constants';
 
 @Component({
   selector: 'app-sidenav',
@@ -27,19 +30,29 @@ import { MenuToolbarComponent } from '../components/menu-toolbar/menu-toolbar.co
     MatIconModule,
     AsyncPipe,
     LogoComponent,
-    MenuToolbarComponent,
+    ActionsToolbarComponent,
+    ThemeManagerComponent,
+    SideRightComponent,
+    SideLeftComponent,
   ],
 })
 export class SidenavComponent {
   private breakpointObserver = inject(BreakpointObserver);
 
-  // using XGA landscape min
-  isMD$: Observable<boolean> = this.breakpointObserver
-    .observe('(min-width: 768px)')
+  isSmall$: Observable<boolean> = this.breakpointObserver
+    .observe('(max-width: 767px)') // limit md Tailwind
     .pipe(
       map((result) => result.matches),
       shareReplay()
     );
+
+  // using XGA landscape min
+  // isWebPortrait$: Observable<boolean> = this.breakpointObserver
+  //   .observe(Breakpoints.WebPortrait) // (min-width: 840px) and (orientation: portrait)
+  //   .pipe(
+  //     map((result) => result.matches),
+  //     shareReplay()
+  //   );
 
   // isHandset$: Observable<boolean> = this.breakpointObserver
   //   .observe(Breakpoints.HandsetPortrait)

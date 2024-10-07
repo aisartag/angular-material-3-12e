@@ -1,0 +1,13 @@
+<mat-nav-list
+  (click)="onClose()"
+  [ngClass]="{ horizontal: horizontal() }"
+  class=""
+>
+  @for(link of links; track link.routerLink){
+  <mat-list-item>
+    <a mat-list-item [routerLink]="link.routerLink" activeLink="active"
+      ><span class="link-title">{{ link.title }}</span></a
+    >
+  </mat-list-item>
+  }
+</mat-nav-list>

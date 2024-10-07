@@ -1,0 +1,95 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Why Signals?</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile [colspan]="'2'" [rowspan]="'1'">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title> Senza Signal </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <h3>{{ counter }}</h3>
+          <div class="container-count">
+            <button mat-stroked-button (click)="increment()">
+              Increment (+)
+            </button>
+
+            <button mat-stroked-button (click)="decrement()">
+              Decrement (-)
+            </button>
+          </div>
+          <p style="text-align: left">
+            Questo comportamento è quasi una magia. Come fa angular a sapere che
+            <b>counter</b> è variato e che deve aggiornare la vista? Ebbene
+            angular ha uno speciale meccanismo che gli consente di sapere che
+            una variabile legata al DOM è variata e quindi aggiorna il DOM
+            stesso senza necessità di un osservabile. Per fare questo Angular
+            <b
+              >esamina l'intero albero dei componenti e confronta ogni singola
+              espressione col valore prima di un evento e poi dopo l'evento</b
+            >
+            ( nel nostro caso un click ) e se c'è differenza il componente sarà
+            contrassegnato dirty e di conseguenza il DOM aggiornato
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="'2'" [rowspan]="'1'">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title> Con Signal </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>
+            <h3>{{ counterSignal() }}</h3>
+
+            <button mat-stroked-button (click)="incrementSignal()">
+              Increment (+)
+            </button>
+            <button mat-stroked-button (click)="decrementSignal()">
+              Decrement (-)
+            </button>
+          </div>
+          <p>
+            Confrontando la sintassi il passaggio a signal non è eccessivamente
+            oneroso e per comprenderne i vantaggi:
+            <a
+              mat-stroked-button
+              href="https://www.youtube.com/watch?v=KtEWoFElU9k"
+              >Why Angular Signals? Write Your First Signal</a
+            >
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+
+    <mat-grid-tile [colspan]="'2'" [rowspan]="'1'">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title> Con &#064;ngrx/signals </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>
+            <h3>{{ state.count() }}</h3>
+
+            <button mat-stroked-button (click)="incrementCount()">
+              Increment (+)
+            </button>
+            <button mat-stroked-button (click)="decrementCount()">
+              Decrement (-)
+            </button>
+          </div>
+          <p>
+            Confrontando la sintassi il passaggio a signal non è eccessivamente
+            oneroso e per comprenderne i vantaggi:
+            <a
+              mat-stroked-button
+              href="https://dev.to/ngrx/announcing-ngrx-v17-introducing-ngrx-signals-operators-performance-improvements-workshops-and-more-55e4"
+              >Defining State</a
+            >
+          </p>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+</div>

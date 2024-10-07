@@ -1,8 +1,0 @@
-@use "@angular/material" as mat;
-
-@mixin theme($theme) {
-  .logo {
-    //  Read the 50 hue from the primary color palette.
-    stroke: mat.get-theme-color($theme, primary);
-  }
-}

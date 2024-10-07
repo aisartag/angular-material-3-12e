@@ -1,0 +1,36 @@
+<div class="actions-portal-container">
+  <button mat-icon-button class="btn-portal-close" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+  <div class="actions-portal-content">
+    <div class="list-actions">
+      <app-main-menu (close)="onClose()" />
+    </div>
+
+    <mat-divider />
+
+    <mat-form-field appearance="outline">
+      <mat-label>Switch Theme</mat-label>
+
+      <mat-select
+        [value]="theme.currentTheme().theme"
+        (valueChange)="onValueChange($event)"
+      >
+        <mat-select-trigger>
+          <div class="select-align-value">
+            <mat-icon>{{
+              theme.isDark() ? "dark_mode" : "light_mode"
+            }}</mat-icon>
+            <b>{{ theme.currentTheme().theme | titlecase }}</b>
+          </div>
+        </mat-select-trigger>
+        @for( theme of themeIcons; track theme.preferredTheme){
+        <mat-option [value]="theme.preferredTheme"
+          ><mat-icon>{{ theme.iconName }}</mat-icon
+          >{{ theme.preferredTheme | titlecase }}</mat-option
+        >
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

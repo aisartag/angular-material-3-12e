@@ -7,7 +7,6 @@
 
 :root {
   // @include mat.all-component-themes($my-app-theme);
-  --zizza-test: red;
 
   @include mat.core-theme(themes.$my-app-theme);
   @include mat.button-theme(themes.$my-app-theme);
@@ -19,12 +18,38 @@
   @include mat.sidenav-theme(themes.$my-app-theme);
   @include mat.toolbar-theme(themes.$my-app-theme);
   @include mat.list-theme(themes.$my-app-theme);
+  @include mat.divider-theme(themes.$my-app-theme);
+
+  @include mat.button-toggle-theme(themes.$my-app-theme);
+  @include mat.progress-spinner-theme(themes.$my-app-theme);
+
+  @include mat.dialog-theme(themes.$my-app-theme);
+  @include mat.grid-list-theme(themes.$my-app-theme);
+  @include mat.card-theme(themes.$my-app-theme);
+  @include mat.snack-bar-theme(themes.$my-app-theme);
 
   @include mat.typography-hierarchy(themes.$my-app-theme);
 
   @include mat.system-level-colors(themes.$my-app-theme);
   @include mat.system-level-typography(themes.$my-app-theme);
 }
+
+$fill-logo-light-primary: #64748b;
+$fill-logo-dark-primary: #94a3b8;
+
+$fill-logo-light-secondary: #d97706;
+$fill-logo-dark-secondary: #fbbf24;
+
+:root {
+  --pkm-fill-logo-primary: #{$fill-logo-light-primary};
+  --pkm-fill-logo-secondary: #{$fill-logo-light-secondary};
+}
+
+.dark-theme {
+  --pkm-fill-logo-primary: #{$fill-logo-dark-primary};
+  --pkm-fill-logo-secondary: #{$fill-logo-dark-secondary};
+}
+// }
 
 /*************************************************************
 Gestione statica del tema
@@ -44,4 +69,8 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.pkm-overlay-blurred {
+  backdrop-filter: blur(4px);
 }

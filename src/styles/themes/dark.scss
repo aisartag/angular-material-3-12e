@@ -9,8 +9,23 @@
   @include mat.form-field-color(themes.$my-app-dark-theme);
   @include mat.input-color(themes.$my-app-dark-theme);
 
+  @include mat.sidenav-color(themes.$my-app-dark-theme);
+  @include mat.toolbar-color(themes.$my-app-dark-theme);
+  @include mat.list-color(themes.$my-app-dark-theme);
+  @include mat.divider-color(themes.$my-app-dark-theme);
+
+  @include mat.button-toggle-theme(themes.$my-app-dark-theme);
+  @include mat.progress-spinner-theme(themes.$my-app-dark-theme);
+
+  @include mat.dialog-theme(themes.$my-app-dark-theme);
+  @include mat.grid-list-theme(themes.$my-app-dark-theme);
+  @include mat.card-theme(themes.$my-app-dark-theme);
+  @include mat.snack-bar-theme(themes.$my-app-dark-theme);
+
   @include mat.typography-hierarchy(themes.$my-app-dark-theme);
 
   @include mat.system-level-colors(themes.$my-app-dark-theme);
   @include mat.system-level-typography(themes.$my-app-dark-theme);
+
+  --pkm-logo-primary: #94a3b8;
 }

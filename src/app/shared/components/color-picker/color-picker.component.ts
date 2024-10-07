@@ -1,7 +1,7 @@
 import { Component, computed, effect, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { ThemeManager } from '../../../theme-manager.service';
+import { ThemeManager } from '../../../core/services/theme-manager.service';
 
 import {
   argbFromHex,

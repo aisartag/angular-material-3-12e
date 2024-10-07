@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ThemeManager } from '../../../theme-manager.service';
+import { ThemeManager } from '../../../core/services/theme-manager.service';
 
 @Component({
   selector: 'app-logo',

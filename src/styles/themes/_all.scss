@@ -4,7 +4,7 @@
 M3-THEME
 tema generato con ng g @angular/material:m3-theme
 **************************************************************************/
-@use "../../../m3-theme.scss";
+@use "./m3-theme.scss";
 $my-app-theme: m3-theme.$light-theme;
 $my-app-dark-theme: m3-theme.$dark-theme;
 

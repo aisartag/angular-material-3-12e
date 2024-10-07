@@ -11,17 +11,6 @@ import { SidenavComponent } from './core/layout/sidenav/sidenav.component';
 })
 export class AppComponent {
   title = 'angular-material-3-12e';
-  // theme = inject(ThemeManager);
-
-  // // using signal
-  // isDark = this.theme.isDark;
-
-  // // using rxjs
-  // // isDark$ = this.theme.isDark$;
-
-  // changeTheme(theme: string) {
-  //   this.theme.changeTheme(theme);
-  // }
 
   // changeFlatButtonFontSize(ev: Event) {
   //   const size = (ev.target as HTMLInputElement).value ?? '14';

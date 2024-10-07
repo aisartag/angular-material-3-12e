@@ -1,0 +1,18 @@
+<button
+  mat-icon-button
+  cdkOverlayOrigin
+  #trigger="cdkOverlayOrigin"
+  (click)="overlayOpen = !overlayOpen"
+>
+  <mat-icon>more_vert</mat-icon>
+</button>
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="trigger"
+  [cdkConnectedOverlayOpen]="overlayOpen"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  [cdkConnectedOverlayBackdropClass]="'pkm-overlay-blurred'"
+  (overlayOutsideClick)="overlayOpen = false; $event.stopPropagation()"
+>
+  <app-actions-portal (close)="overlayOpen = false" />
+</ng-template>
