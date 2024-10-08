@@ -1,1 +1,10 @@
-<p>things works!</p>
+<mat-selection-list>
+  @for(thing of store.things() ; track thing.id){
+  <mat-list-option
+    [selected]="thing.completed"
+    (selectedChange)="store.toggleThing({ id: thing.id, completed: $event })"
+  >
+    <span>{{ thing.text }}</span>
+  </mat-list-option>
+  }
+</mat-selection-list>

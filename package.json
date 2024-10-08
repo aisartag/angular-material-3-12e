@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "start:db": "json-server db.json --port 4100",
     "test": "ng test"
   },
   "private": true,
@@ -21,8 +22,8 @@
     "@angular/platform-browser-dynamic": "^18.2.7",
     "@angular/router": "^18.2.7",
     "@material/material-color-utilities": "^0.3.0",
+    "@ngrx/operators": "^18.0.2",
     "@ngrx/signals": "18.0.2",
-    "angular-in-memory-web-api": "^0.18.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
@@ -39,5 +40,6 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
     "typescript": "~5.5.2"
-  }
+  },
+  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
 }

@@ -40,5 +40,22 @@
       "title": "Learn Nest",
       "completed": false
     }
+  ],
+  "things": [
+    {
+      "id": "1",
+      "text": "Papere chiatte",
+      "completed": false
+    },
+    {
+      "id": "2",
+      "text": "Musse e puorche",
+      "completed": false
+    },
+    {
+      "id": "3",
+      "text": "Cuoppe allessa",
+      "completed": true
+    }
   ]
 }

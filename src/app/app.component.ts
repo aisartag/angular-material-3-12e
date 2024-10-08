@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { SidenavComponent } from './core/layout/sidenav/sidenav.component';
+import { ThingsService } from './features/things/things.service';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,12 @@ import { SidenavComponent } from './core/layout/sidenav/sidenav.component';
 })
 export class AppComponent {
   title = 'angular-material-3-12e';
+
+  thingsService = inject(ThingsService);
+
+  constructor() {
+    this.thingsService.getAll();
+  }
 
   // changeFlatButtonFontSize(ev: Event) {
   //   const size = (ev.target as HTMLInputElement).value ?? '14';
