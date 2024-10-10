@@ -1,0 +1,35 @@
+<div class="container">
+  <mat-list>
+    @for(pokemon of data(); track pokemon){
+    <mat-list-item>
+      <span>{{ pokemon }}</span>
+    </mat-list-item>
+    }
+  </mat-list>
+
+  <div class="content">
+    <mat-form-field appearance="fill">
+      <mat-label>digita email e premi Invio</mat-label>
+      <input
+        matInput
+        #input
+        (keyup.enter)="sottoscrivi(input.value); input.value = ''"
+      />
+      <mat-hint>Iscriviti al campionato</mat-hint>
+    </mat-form-field>
+
+    <button mat-stroked-button (click)="refresh()">Refresh Manuale</button>
+  </div>
+
+  <mat-divider />
+
+  <div class="comments">
+    <p>
+      Il rilevatore dei cambiamenti "OnPush" non si attiva la lista nel parent è
+      stata aggiornata col metodo push che non modifica il riferimento all'array
+      di input. L'attivazione del rilevatore può avvenire o inviando un evento
+      al parent (iscrizione al campionato) o utilizzando detectChanges di
+      ChangeDetectorRef.
+    </p>
+  </div>
+</div>

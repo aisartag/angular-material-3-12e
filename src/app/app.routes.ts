@@ -35,6 +35,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'cd-intro',
+    loadComponent: () =>
+      import('./features/change-detection/cd-intro/cd-intro.component').then(
+        (c) => c.CdIntroComponent
+      ),
+  },
+
+  {
     path: 'pokemons',
     loadComponent: () =>
       import('./features/change-detection/pokemons/pokemons.component').then(

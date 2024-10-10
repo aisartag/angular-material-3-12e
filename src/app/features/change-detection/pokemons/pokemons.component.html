@@ -1,1 +1,48 @@
-<p>pokemons works!</p>
+<div class="container">
+  <h1 class="mat-headline-medium">
+    Array in input con strategia di rilevamento OnPush
+  </h1>
+  <p>
+    I decoratori property-binding &#064;Input ed event-binding &#064;Output sono
+    stati sostituiti, con l'introduzione dei signals da
+    <em>input</em> e <em>output</em> ( che sono segnali) nei componenti child,
+  </p>
+
+  <div class="input-name">
+    <mat-form-field appearance="fill">
+      <mat-label>digita un pokémon e premi Invio</mat-label>
+      <input
+        matInput
+        #input
+        (keyup.enter)="addPokemon(input.value); input.value = ''"
+      />
+    </mat-form-field>
+    <!-- <button
+      mat-stroked-button
+      (click)="addPokemon(input.value); input.value = ''"
+    >
+      Aggiungi Pokemon
+    </button> -->
+  </div>
+
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Mutabile">
+      <app-mutable-list [data]="pokemonsMut" (subscribe)="subscribe($event)" />
+    </mat-tab>
+    <mat-tab label="Immutabile">
+      <app-immutable-list
+        [data]="pokemonsImm"
+        (subscribe)="subscribe($event)"
+      />
+    </mat-tab>
+    <mat-tab label="Osservabile">
+      <app-observable-list [data]="pokemonsSub" (subscribe)="subscribe($event)"
+    /></mat-tab>
+    <mat-tab label="Signal"
+      ><app-signal-list
+        [data]="pokemonSignal()"
+        (subscribe)="subscribe($event)"
+      />
+    </mat-tab>
+  </mat-tab-group>
+</div>

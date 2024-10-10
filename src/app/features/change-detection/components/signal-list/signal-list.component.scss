@@ -1,0 +1,22 @@
+.container {
+  width: 100%;
+  padding: 1.5rem;
+
+  mat-divider {
+    margin-block: 1rem;
+  }
+
+  .content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  mat-form-field {
+    width: 50%;
+  }
+
+  .comments {
+    text-align: left;
+  }
+}

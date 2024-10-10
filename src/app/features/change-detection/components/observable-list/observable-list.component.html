@@ -1,0 +1,33 @@
+<div class="container">
+  <mat-list>
+    @for(pokemon of pokemons; track pokemon){
+    <mat-list-item>
+      <span>{{ pokemon }}</span>
+    </mat-list-item>
+    }
+  </mat-list>
+
+  <div class="content">
+    <mat-form-field appearance="fill">
+      <mat-label>digita email e premi Invio</mat-label>
+      <input
+        matInput
+        #input
+        (keyup.enter)="sottoscrivi(input.value); input.value = ''"
+      />
+      <mat-hint>Iscriviti al campionato</mat-hint>
+    </mat-form-field>
+  </div>
+
+  <mat-divider />
+
+  <div class="comments">
+    <p>
+      Il rilevatore dei cambiamenti "OnPush" sembra si sia attivato malgrado in
+      input è stato passato un riferimento a un BehaviorSubject che non è stato
+      modificato.In fatti il rilevatore non si è attivato ed è stata
+      l'istruzione "this.#cd.markForCheck();" che conclude subscribe ad attivare
+      il rilevatore,
+    </p>
+  </div>
+</div>

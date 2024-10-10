@@ -13,7 +13,10 @@ import { Link } from '../../../../shared/utils/type-definitions';
   styleUrl: './side-left.component.scss',
 })
 export class SideLeftComponent {
-  linksDetection: Link[] = [{ routerLink: 'pokemons', title: 'Pokemons' }];
+  linksDetection: Link[] = [
+    { routerLink: 'cd-intro', title: 'Introduzione' },
+    { routerLink: 'pokemons', title: 'Pokemons' },
+  ];
 
   linksSignal: Link[] = [
     { routerLink: 'signals-intro', title: 'Signals Intro' },

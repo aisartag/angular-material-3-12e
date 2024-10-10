@@ -1,0 +1,212 @@
+<h1 class="mat-headline-large">Angular e il rilevamento delle modifiche</h1>
+<h3 class="mat-headline-small">Come viene implementato?</h3>
+<p>
+  Angular può rilevare quando i dati nei componenti cambiano e di conseguenza
+  rieseguire il rendering per riflettere la modifica. E com'è possibile rilevare
+  un evento tipo un click ?
+</p>
+<p>
+  Il runtime di Javascipt può essere sovrascritto ed è ciò che fa Angular al
+  momento dell'avvio: applica patch alle API di basso livello del browser,
+  sostituendo ad esempio <em>addEventListener</em>. Ciò consente ad Angular di
+  effettuare il rilevamento delle modifiche.
+</p>
+
+<p>
+  <em>
+    Questa patch di basso livello delle API del browser viene eseguita da una
+    libreria distribuita con Angular chiamata Zone.js. È importante avere
+    un'idea di cosa sia una zona. Una zona non è altro che un contesto di
+    esecuzione che sopravvive a più turni di esecuzione di Javascript VM. È un
+    meccanismo generico che possiamo usare per aggiungere funzionalità extra al
+    browser. Angular usa Zones internamente per attivare il rilevamento delle
+    modifiche, ma un altro possibile uso sarebbe quello di fare il profiling
+    delle applicazioni o tenere traccia di lunghe stack trace che vengono
+    eseguite su più turni di VM.</em
+  >
+  <a
+    href="https://blog.angular-university.io/how-does-angular-2-change-detection-really-work/"
+    >Angular University</a
+  >
+</p>
+
+<p>
+  API asincrone del browser supportate I seguenti meccanismi del browser
+  utilizzati di frequente sono stati patchati per supportare il rilevamento
+  delle modifiche:
+</p>
+<ul>
+  <li>tutti gli eventi del browser (clic, mouseover, keyup, ecc.)</li>
+  <li>setTimeout() setInterval()</li>
+  <li>
+    Richieste HTTP Ajax (livello basso di ogni tipo di comunicazione http)
+  </li>
+</ul>
+
+<h3 class="mat-headline-small">
+  Come funziona il meccanismo predefinito di rilevamento delle modifiche?
+</h3>
+<p>
+  Per ogni proprietà nel modello del componente viene confrontato il suo valore
+  corrente con quello precedente e se non coincidono il componente stesso viene
+  marcato per la ri-renderizzazione
+</p>
+
+<p>Per vedere cosa succede nella pratica analizziamo il seguente frammento:</p>
+
+<mat-card appearance="outlined">
+  <p>todo.model.ts</p>
+  <pre>
+    <code>
+  export interface Owner &#123;
+   firstName: string; 
+   lastName: string; 
+&#125;
+
+ export interface Todo &#123;
+   id: number; 
+   description: 
+   string; completed: boolean;
+   owner: Owner; 
+&#125;
+    </code>
+  </pre>
+
+  <p>todo-item.component.ts</p>
+  <pre>
+        <code>
+import &#123;  Component, Input, Output &#125; from '&#064;angular/core';
+
+&#064;Component(&#123;
+  selector: 'todo-imm',
+  standalone: true,
+  imports: [],
+  templateUrl: './todo.component.html',
+  styleUrl: './todo.component.scss',
+&#125;)
+export class TodoItemComponent &#123;
+    &#064;Input() todo:Todo;
+
+    &#064;Output()
+  toggle = new EventEmitter&lt;Object&gt;();
+
+  onToggle() &#123;
+      this.toggle.emit(this.todo);
+  &#125; 
+&#125; 
+</code>
+</pre>
+</mat-card>
+
+<p>
+  Il "change detector" di default attiva il <em>change</em> per le differenze
+  sulle proprietà di Todo del primo livello
+</p>
+<p>
+  Analizza anche le proprietà nidificate ovvero quelle di <em>owner</em> ma solo
+  se presenti nel template (html). Nel caso solo firstName è presente nel
+  template e lastName no ed è la proprietà modificate il <em>change</em> non
+  viene attivato
+</p>
+
+<p>Con questo possiamo tranquillamente affermare che:</p>
+<p>
+  <em
+    ><b>
+      Di default, Angular Change Detection funziona verificando se il valore
+      delle espressioni modello è cambiato. Questo viene fatto per tutti i
+      componenti.
+    </b></em
+  >
+</p>
+
+<p>Possiamo anche concludere che:</p>
+<p>
+  <em
+    ><b>
+      Per impostazione predefinita, Angular non esegue un confronto approfondito
+      degli oggetti per rilevare le modifiche, ma tiene conto solo delle
+      proprietà utilizzate dal modello
+    </b></em
+  >
+</p>
+
+<h3 class="mat-headline-small">Meccanismo di rilevamento OnPush</h3>
+<p>
+  Il meccanismo di rilevazione predefinito "change detector default" sopra
+  descritto ad ogni evento risponde ripercorrendo l'intero albero dei componenti
+  ed analizzando ciascun componentecon i criteri di cui sopra.
+</p>
+<p>
+  Benché facile da comprendere e sufficiente per la maggior parte delle
+  applicazioni il "change detector default" per le applcazioni grandi può essere
+  un collo di bottiglia e sarebbe preferibile il
+  <b>"change detector OnPush"</b> Per una sua descrizione concisa anche se poco
+  analitica consulta:
+</p>
+<p>
+  <b>
+    <a href="https://angular.dev/best-practices/skipping-subtrees"
+      >Skipping component subtrees</a
+    >
+  </b>
+</p>
+<p>Come cenno iniziale ma fondamentale:</p>
+<p>
+  <b>
+    Nel caso in cui un input riceva un oggetto mutabile come valore e modifichi
+    l'oggetto ma conservi il riferimento, Angular non invocherà il rilevamento
+    delle modifiche. Questo è il comportamento previsto perché il valore
+    precedente e quello corrente dell'input puntano allo stesso riferimento.
+  </b>
+</p>
+
+<h3 class="mat-headline-small">Mutable and Immutable</h3>
+<p>
+  In JavaScript , oggetti e array sono modificabili (mutable) di default: le
+  loro proprietà ed elementi possono essere modificati senza creare un nuovo
+  oggetto o array. Al contrario, i valori primitivi ( number, string, boolean)
+  sono immutabili (immutable): una volta creato un valore primitivo, non può
+  essere modificato, sebbene alla variabile che lo contiene possa essere
+  assegnato un altro valore.
+</p>
+
+<mat-card appearance="outlined">
+  <pre><code>
+let x = 10;
+let y = x;
+
+y = 20;
+
+console.log("x=%d - y=%d", x, y);
+
+let persona = &#123; nome: "Ciccio", cognome: "Rossi" &#125;;
+let amico = persona;
+
+amico.nome = "carmine";
+
+console.log("persona=%s - amico=%s", persona.nome, amico.nome); -->
+
+    </code></pre>
+</mat-card>
+
+<p>
+  Le variabili nativamente immutabili (number, string boolean) sono memorizzate
+  per valore; x e y sono due indirizzi di memoria differenti e quindi il valore
+  di x viene copiato nell'indirizzo di y ( naturalmente intuibile),
+</p>
+
+<p>
+  Le variabili nativamente mutabili (object, array) sono un riferimento
+  all'indirizzo di memorizzazione del valore e lo statement let amico = persona
+  ha come effetto che amico è un riferimento uguale a quello di persona e non ne
+  è una copia. Pertanto una variazione di proprieyà su uno dei due ha riflesso
+  sull'altro ( l'oggetto in sostanza non viene duplicato)
+</p>
+
+<p>
+  Ritornando alla strategia di rilevamento OnPush analizzeremo le tecniche
+  necessarie per evitare questa mutabilità passando copie agli input e
+  consentendo al change detector di agire di fronte al cambio di riferimento
+  nell'input.
+</p>
