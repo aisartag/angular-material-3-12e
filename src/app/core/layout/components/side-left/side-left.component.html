@@ -1,16 +1,27 @@
 <mat-toolbar>Menu</mat-toolbar>
 
-<!-- <p style="border: 1px solid red" class="mat-title-medium">Signals</p>
-<mat-nav-list style="border: 1px solid red; margin: 0">
-  <a mat-list-item href="#">Link 1</a>
-  <a mat-list-item href="#">Link 2</a>
-  <a mat-list-item href="#">Link 3</a>
-</mat-nav-list> -->
-
 <div class="container">
-  <h1 class="title-group">Signals</h1>
+  <h1 class="title-group">Change Detection</h1>
+  <mat-nav-list>
+    @for(link of linksDetection; track link.routerLink ){
+    <a mat-list-item [routerLink]="link.routerLink"
+      ><span>{{ link.title }}</span></a
+    >
+    }
+  </mat-nav-list>
+
+  <h1 class="title-group">Signals Base</h1>
   <mat-nav-list>
     @for(link of linksSignal; track link.routerLink ){
+    <a mat-list-item [routerLink]="link.routerLink"
+      ><span>{{ link.title }}</span></a
+    >
+    }
+  </mat-nav-list>
+
+  <h1 class="title-group">Ngrx Signals</h1>
+  <mat-nav-list>
+    @for(link of linksNgrxSignals; track link.routerLink ){
     <a mat-list-item [routerLink]="link.routerLink"
       ><span>{{ link.title }}</span></a
     >

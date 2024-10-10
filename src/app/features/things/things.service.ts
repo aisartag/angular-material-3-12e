@@ -30,9 +30,24 @@ export class ThingsService {
 
   toggleThing(id: string, completed: boolean): Observable<any> {
     const url = `${this.#url}/${id}`;
+    console.log('toggleThing************************');
     return this.http
       .patch(url, { completed }, httpOptions)
       .pipe(catchError(this.handleError));
+  }
+
+  addThing(thing: Partial<Thing>): Observable<any> {
+    return this.http
+      .post(this.#url, thing, httpOptions)
+      .pipe(catchError(this.handleError));
+  }
+
+  deleteThing(id: string): Observable<any> {
+    const url = `${this.#url}/${id}`;
+    return this.http.delete(url).pipe(
+      tap((t) => console.log(t)),
+      catchError(this.handleError)
+    );
   }
 
   private handleError(error: HttpErrorResponse) {

@@ -1,0 +1,23 @@
+:host {
+  .container {
+    // border: 1px solid blue;
+    max-width: 768px;
+    margin: 0 auto;
+    padding: 1.5rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .area-store {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+
+      span {
+        font: var(--sys-headline-large);
+      }
+    }
+  }
+}

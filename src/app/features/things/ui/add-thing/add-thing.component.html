@@ -1,0 +1,10 @@
+<mat-form-field class="todo-input" appearance="fill">
+  <mat-label>Digita nome THING e premi Invio</mat-label>
+  <input
+    matInput
+    variant="outline"
+    #input
+    (keyup.enter)="addThing.emit(input.value); input.value = ''"
+  />
+  <mat-icon matSuffix>edit</mat-icon>
+</mat-form-field>

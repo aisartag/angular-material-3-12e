@@ -1,0 +1,29 @@
+<mat-selection-list
+  (selectionChange)="
+    toggleThing.emit({
+      id: $event.options[0].value,
+      completed: $event.options[0].selected
+    })
+  "
+>
+  @for(thing of things() ; track thing.id){
+  <mat-list-option [selected]="thing.completed" [value]="thing.id">
+    <div class="thing-row">
+      <button
+        mat-icon-button
+        (click)="$event.stopPropagation(); deleteThing.emit(thing.id)"
+      >
+        <mat-icon>delete</mat-icon>
+      </button>
+
+      <span
+        [ngStyle]="{ 'text-decoration': thing.completed ? 'line-through' : '' }"
+      >
+        {{ thing.text }}
+      </span>
+    </div>
+  </mat-list-option>
+  }
+</mat-selection-list>
+
+<!--  (selectedChange)="toggleThing.emit({ id: thing.id, completed: $event })" -->

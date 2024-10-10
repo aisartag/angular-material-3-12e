@@ -43,19 +43,39 @@
   ],
   "things": [
     {
-      "id": "1",
-      "text": "Papere chiatte",
-      "completed": false
-    },
-    {
-      "id": "2",
-      "text": "Musse e puorche",
-      "completed": false
-    },
-    {
-      "id": "3",
-      "text": "Cuoppe allessa",
+      "id": "c464",
+      "text": "sasicchie e patane",
       "completed": true
+    },
+    {
+      "id": "f0b5",
+      "text": "alice salate",
+      "completed": true
+    },
+    {
+      "id": "42fd",
+      "text": "muzzarelle ncarrozze",
+      "completed": false
+    },
+    {
+      "id": "b47d",
+      "text": "puoche arruste",
+      "completed": true
+    },
+    {
+      "id": "164a",
+      "text": "summente abbrustulite",
+      "completed": false
+    },
+    {
+      "id": "a05e",
+      "text": "cerase u spirite",
+      "completed": false
+    },
+    {
+      "id": "44ce",
+      "text": "surece",
+      "completed": false
     }
   ]
 }

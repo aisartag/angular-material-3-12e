@@ -35,6 +35,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'pokemons',
+    loadComponent: () =>
+      import('./features/change-detection/pokemons/pokemons.component').then(
+        (c) => c.PokemonsComponent
+      ),
+  },
+
+  {
     path: 'signals-intro',
     loadComponent: () =>
       import('./features/signals/signals-intro/signals-intro.component').then(
@@ -43,20 +51,36 @@ export const routes: Routes = [
   },
 
   {
-    path: 'todos-list',
+    path: 'ngrx-signals-intro',
     loadComponent: () =>
-      import('./features/todos/todos-list/todos-list.component').then(
-        (c) => c.TodosListComponent
-      ),
+      import(
+        './features/ngrx-signals/ngrx-signals-intro/things.component'
+      ).then((c) => c.ThingsComponent),
   },
 
   {
-    path: 'todos-list-http',
+    path: 'ngrx-signals-methods',
     loadComponent: () =>
       import(
-        './features/todos-http/todos-list-http/todos-list-http.component'
-      ).then((c) => c.TodosListHttpComponent),
+        './features/ngrx-signals/ngrx-signals-methods/counter-methods/counter-methods.component'
+      ).then((c) => c.CounterMethodsComponent),
   },
+
+  // {
+  //   path: 'todos-list',
+  //   loadComponent: () =>
+  //     import('./features/todos/todos-list/todos-list.component').then(
+  //       (c) => c.TodosListComponent
+  //     ),
+  // },
+
+  // {
+  //   path: 'todos-list-http',
+  //   loadComponent: () =>
+  //     import(
+  //       './features/todos-http/todos-list-http/todos-list-http.component'
+  //     ).then((c) => c.TodosListHttpComponent),
+  // },
 
   {
     path: 'things',

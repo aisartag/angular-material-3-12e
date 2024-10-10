@@ -1,0 +1,102 @@
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <p>thing.model.ts</p>
+    <pre>
+          <code>
+  
+export type Thing = &#123;
+    id: string;
+    text: string;
+    completed: boolean;
+&#125;;
+                  
+       </code>
+            </pre>
+    <!-- </div> -->
+  </mat-card-content>
+</mat-card>
+<br />
+
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <p>things.store.ts</p>
+    <pre>
+            <code>
+import &#123; signalStore, withState &#125; from '&#064;ngrx/signals';
+import &#123; Thing &#125; from './thing.model';
+
+export type ThingsFilter = 'all' | 'pending' | 'completed';
+
+type ThingsState = &#123;
+    things: Thing[];
+    isLoading: boolean;
+    filter: ThingsFilter;
+&#125;;
+
+const initialState: ThingsState = &#123;
+    things: [],
+    isLoading: false,
+    filter: 'all',
+&#125;;
+
+export const ThingsStore = signalStore(
+    withState(initialState)
+);
+            </code>
+        </pre>
+  </mat-card-content>
+</mat-card>
+<br />
+
+<ng-content></ng-content>
+
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <p>things.component.ts</p>
+    <pre>
+              <code>
+import &#123; Component, inject &#125; from '&#064;angular/core';
+import &#123; ThingsStore &#125; from './things.store';
+
+&#064;Component(&#123;
+  /* ... */
+  // 👇 Providing `ThingsStore` at the component level.
+  providers: [ThingsStore],
+&#125;)
+export class ThingsComponent &#123;
+  readonly store = inject(ThingsStore);
+&#125;
+</code>
+</pre>
+  </mat-card-content>
+</mat-card>
+<br />
+
+<ng-content select="store-global"></ng-content>
+
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <p>things.store.ts globale</p>
+    <pre>
+                <code>
+export const ThingsStore = signalStore(
+&#123; providedIn: 'root' &#125;,
+withState(initialState)
+);
+
+                </code>
+            </pre>
+  </mat-card-content>
+</mat-card>
+<br />
+<ng-content select="running"></ng-content>
+
+<mat-card appearance="outlined">
+  <mat-card-content>
+    <code>
+      &lt;p&gt;Things: &#123;&#123;store.things()&#125; &#125;&lt;/p&gt;
+      <br />
+      &lt;p&gt;Loading: &#123;&#123;store.isLoading()&#125; &#125;&lt;/p&gt;
+    </code>
+  </mat-card-content>
+</mat-card>

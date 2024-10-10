@@ -1,12 +1,13 @@
 import {
   patchState,
   signalStore,
+  withComputed,
   withHooks,
   withMethods,
   withState,
 } from '@ngrx/signals';
 import { Thing } from './things.model';
-import { inject } from '@angular/core';
+import { computed, inject } from '@angular/core';
 import { ThingsService } from './things.service';
 import { pipe, switchMap, tap } from 'rxjs';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
@@ -34,12 +35,52 @@ export const ThingsStore = signalStore(
   withMethods((store, thingsService = inject(ThingsService)) => ({
     loadAll: rxMethod<void>(
       pipe(
-        tap(() => patchState(store, { loading: true })),
+        tap(() => patchState(store, { loading: true, error: null })),
         switchMap(() => {
           return thingsService.getAll().pipe(
             tapResponse({
               next: (things: Thing[]) => patchState(store, { things }),
-              error: console.error,
+              error: (err: string) => patchState(store, { error: err }),
+              finalize: () => patchState(store, { loading: false }),
+            })
+          );
+        })
+      )
+    ),
+
+    addThing: rxMethod<string>(
+      pipe(
+        tap((_) => patchState(store, { loading: true, error: null })),
+
+        switchMap((text) => {
+          return thingsService.addThing({ text, completed: false }).pipe(
+            tapResponse({
+              next: (thing) => {
+                // console.log('thing', thing);
+                patchState(store, (state) => ({
+                  things: thing ? [...state.things, thing] : [...state.things],
+                }));
+              },
+              error: (err: string) => patchState(store, { error: err }),
+              finalize: () => patchState(store, { loading: false }),
+            })
+          );
+        })
+      )
+    ),
+
+    deleteThing: rxMethod<string>(
+      pipe(
+        tap((_) => patchState(store, { loading: true, error: null })),
+        switchMap((id) => {
+          return thingsService.deleteThing(id).pipe(
+            tapResponse({
+              next: (thing) =>
+                patchState(store, (state) => ({
+                  things: state.things.filter((t) => t.id !== id),
+                })),
+
+              error: (err: string) => patchState(store, { error: err }),
               finalize: () => patchState(store, { loading: false }),
             })
           );
@@ -49,6 +90,7 @@ export const ThingsStore = signalStore(
 
     toggleThing: rxMethod<{ id: string; completed: boolean }>(
       pipe(
+        tap((_) => patchState(store, { loading: true, error: null })),
         switchMap((props) => {
           return thingsService.toggleThing(props.id, props.completed).pipe(
             tapResponse({
@@ -60,12 +102,30 @@ export const ThingsStore = signalStore(
                       : thing
                   ),
                 })),
-              error: console.error,
+              error: (err: string) => patchState(store, { error: err }),
+              finalize: () => patchState(store, { loading: false }),
             })
           );
         })
       )
     ),
+
+    updateFilter: (filter: ThingsFilter) => {
+      patchState(store, { filter });
+    },
+  })),
+  withComputed((state) => ({
+    filteredThings: computed(() => {
+      const things = state.things();
+      switch (state.filter()) {
+        case 'all':
+          return [...things];
+        case 'pending':
+          return things.filter((thing) => !thing.completed);
+        case 'completed':
+          return things.filter((thing) => thing.completed);
+      }
+    }),
   })),
   withHooks({
     onInit(store) {

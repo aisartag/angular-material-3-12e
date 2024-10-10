@@ -1,0 +1,47 @@
+<div class="container">
+  <h1 class="mat-headline-medium">
+    <a href="https://ngrx.io/guide/signals"> &#064;ngrx/signals</a>
+  </h1>
+
+  <app-presentation-intro />
+
+  <h3 class="mat-headline-small">Creazione di uno Store</h3>
+  Supponiamo di voler gestire lo stato reattivo di oggetti
+  <em><b>Things</b></em
+  >. Creeremo lo store dei 'things' utilizzando il seguente codice minimale
+
+  <app-code-intro>
+    <div>
+      Quando fornito a livello di componente, lo store è legato al ciclo di vita
+      del componente, rendendolo utile per la gestione dello stato
+      locale/componente.
+    </div>
+    <div ngProjectAs="store-global">
+      In alternativa, un SignalStore può essere registrato globalmente
+      impostando la <b>providedIn proprietà su root</b> quando si definisce lo
+      store.
+    </div>
+
+    <div ngProjectAs="running">In things.component.html aggiungi:</div>
+  </app-code-intro>
+  <br />
+  <br />
+  <p>
+    Se lanciamo l'app otterremo come risultato i valori iniziali dello state!
+  </p>
+  <div class="area-running">
+    <h3 class="mat-headline-small">Running</h3>
+
+    <p>Things: {{ store.things() | json }}</p>
+    <p>Loading: {{ store.isLoading() }}</p>
+    <p>Filer: {{ store.filter() }}</p>
+  </div>
+  <br />
+
+  <h3 class="mat-headline-small">Note conclusive</h3>
+  <p>
+    ATTN! Non ci dilunghiamo su questo esempio che contiene la complessità
+    aggiunta della lettura dati, che rimandiamo alla fine del percorso
+    introduttivo.
+  </p>
+</div>

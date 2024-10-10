@@ -13,10 +13,15 @@ import { Link } from '../../../../shared/utils/type-definitions';
   styleUrl: './side-left.component.scss',
 })
 export class SideLeftComponent {
+  linksDetection: Link[] = [{ routerLink: 'pokemons', title: 'Pokemons' }];
+
   linksSignal: Link[] = [
     { routerLink: 'signals-intro', title: 'Signals Intro' },
-    { routerLink: 'todos-list', title: 'Todos List' },
-    { routerLink: 'todos-list-http', title: 'Todos List Http' },
+  ];
+
+  linksNgrxSignals: Link[] = [
+    { routerLink: 'ngrx-signals-intro', title: 'Introduzione' },
+    { routerLink: 'ngrx-signals-methods', title: 'Store metodi/hooks' },
     { routerLink: 'things', title: 'Things' },
   ];
 }

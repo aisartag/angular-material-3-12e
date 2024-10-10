@@ -1,10 +1,30 @@
-<mat-selection-list>
-  @for(thing of store.things() ; track thing.id){
-  <mat-list-option
-    [selected]="thing.completed"
-    (selectedChange)="store.toggleThing({ id: thing.id, completed: $event })"
-  >
-    <span>{{ thing.text }}</span>
-  </mat-list-option>
+<div class="container">
+  <div class="header">
+    <h2 class="mat-headline-medium">Manage things</h2>
+    <div class="btn-actions">
+      <!-- <button class="btn-refresh" mat-icon-button (click)="reload()">
+        <mat-icon>refresh</mat-icon>
+      </button> -->
+      <!-- <button class="btn-info" mat-icon-button (click)="openModalInfo()">
+        <mat-icon>info</mat-icon>
+      </button> -->
+    </div>
+  </div>
+
+  @if(store.loading()){
+  <mat-spinner />
   }
-</mat-selection-list>
+  <app-add-thing (addThing)="store.addThing($event)" />
+
+  <app-filter-things
+    [filterValue]="store.filter()"
+    (filterUpdate)="store.updateFilter($event)"
+  />
+
+  <app-things-list
+    [things]="store.filteredThings()"
+    [loading]="store.loading()"
+    (toggleThing)="store.toggleThing($event)"
+    (deleteThing)="store.deleteThing($event)"
+  />
+</div>

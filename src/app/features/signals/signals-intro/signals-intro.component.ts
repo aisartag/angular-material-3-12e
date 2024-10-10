@@ -1,4 +1,10 @@
-import { Component, inject, signal, WritableSignal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+  WritableSignal,
+} from '@angular/core';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { map } from 'rxjs/operators';
 import { AsyncPipe } from '@angular/common';
@@ -23,6 +29,7 @@ import { patchState, signalState } from '@ngrx/signals';
     MatButtonModule,
     MatCardModule,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SignalsIntroComponent {
   counter = 0;
