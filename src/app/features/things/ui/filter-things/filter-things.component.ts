@@ -8,7 +8,7 @@ import {
   MatButtonToggleGroup,
   MatButtonToggleModule,
 } from '@angular/material/button-toggle';
-import { TodosFilter } from '../../../todos/store/state.init';
+import { ThingsFilter } from '../../things.store';
 
 @Component({
   selector: 'app-filter-things',
@@ -19,6 +19,6 @@ import { TodosFilter } from '../../../todos/store/state.init';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterThingsComponent {
-  filterValue = input<TodosFilter>();
-  filterUpdate = output<TodosFilter>();
+  filterValue = input<ThingsFilter>();
+  filterUpdate = output<ThingsFilter>();
 }
