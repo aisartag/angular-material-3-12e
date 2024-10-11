@@ -33,7 +33,7 @@ export class SignalListComponent {
   data = input<any[]>();
   subscribe = output<string>();
 
-  sottoscrivi(email: string) {
+  onSubscribe(email: string) {
     this.subscribe.emit(email);
   }
 

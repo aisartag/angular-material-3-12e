@@ -1,0 +1,27 @@
+<div class="container">
+  <p>
+    Hello <b>{{ pokemon()?.name }}</b
+    >, iscriviti alle newsletters inviando la tua email:
+  </p>
+
+  <div class="area-subscribe">
+    <mat-form-field>
+      <mat-label>Digita email</mat-label>
+      <input matInput #email type="email" name="email" />
+    </mat-form-field>
+
+    <button mat-raised-button (click)="subscribeToNewsletter(email.value)">
+      Sottoscrivi newsletters
+    </button>
+  </div>
+
+  <mat-divider />
+
+  <div class="comments mat-body-medium">
+    <p>
+      Qui l'oggetto pokemon è prodotto da un <em>next</em> di un osservabile e
+      prevedibilmente ha un riferimento diverso dal precedente per pertanto il
+      rilevamento delle modifiche OnPush lavora senza problemi.
+    </p>
+  </div>
+</div>

@@ -3,18 +3,19 @@ import {
   ChangeDetectorRef,
   Component,
   inject,
-  Input,
   input,
   output,
 } from '@angular/core';
+import { Observable } from 'rxjs';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatListModule } from '@angular/material/list';
+import { AsyncPipe } from '@angular/common';
 import { MatDivider } from '@angular/material/divider';
 
 @Component({
-  selector: 'app-mutable-list',
+  selector: 'app-observable-list',
   standalone: true,
   imports: [
     MatListModule,
@@ -22,23 +23,26 @@ import { MatDivider } from '@angular/material/divider';
     MatFormFieldModule,
     MatInputModule,
     MatDivider,
+    AsyncPipe,
   ],
-  templateUrl: './mutable-list.component.html',
-  styleUrl: './mutable-list.component.scss',
+  templateUrl: './observable-list.component.html',
+  styleUrl: './observable-list.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MutableListComponent {
+export class ObservableListComponent {
   readonly #cd = inject(ChangeDetectorRef);
-
-  // @Input() pokemons!: string[];
-  data = input<string[]>();
+  data = input<Observable<any>>();
   subscribe = output<string>();
+  pokemons: string[] = [];
 
-  sottoscrivi(email: string) {
-    this.subscribe.emit(email);
+  ngOnInit(): void {
+    this.data()?.subscribe((newPkm) => {
+      this.pokemons = [...this.pokemons, ...newPkm];
+      this.#cd.markForCheck();
+    });
   }
 
-  refresh() {
-    this.#cd.detectChanges();
+  onSubscribe(email: string) {
+    this.subscribe.emit(email);
   }
 }

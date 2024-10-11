@@ -1,0 +1,33 @@
+<div class="container">
+  <p>
+    Hello <b>{{ pokemon()?.name }}</b
+    >, iscriviti alle newsletters inviando la tua email:
+  </p>
+
+  <div class="area-subscribe">
+    <mat-form-field>
+      <mat-label>Digita email</mat-label>
+      <input matInput #email type="email" name="email" />
+    </mat-form-field>
+
+    <button mat-raised-button (click)="subscribeToNewsletter(email.value)">
+      Sottoscrivi newsletters
+    </button>
+  </div>
+
+  <mat-divider />
+
+  <div class="comments mat-body-medium">
+    <p>
+      L'oggetto Pokemon viene modificato nel parent mutando le singole
+      proprietà. Se siamo in modalità OnPush col rilevatore la componente non
+      dovrebbe sentire la variazione perché, ribadiamolo, la rilevazione onPush
+      funziona se c'è un cambio di riferimento nel property binding (input),
+    </p>
+    <p>
+      Ricordiamo per inciso che un evento qualsiasi nel componente attiva il
+      rilevamento e quindi aggiorna le proprietà del componente se presenti nel
+      template.
+    </p>
+  </div>
+</div>

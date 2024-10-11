@@ -1,0 +1,31 @@
+<div class="container">
+  <p>
+    Hello <b>{{ pokemon()?.name }}</b
+    >, iscriviti alle newsletters inviando la tua email:
+  </p>
+
+  <div class="area-subscribe">
+    <mat-form-field>
+      <mat-label>Digita email</mat-label>
+      <input matInput #email type="email" name="email" />
+    </mat-form-field>
+
+    <button mat-raised-button (click)="subscribeToNewsletter(email.value)">
+      Sottoscrivi newsletters
+    </button>
+  </div>
+
+  <mat-divider />
+
+  <div class="comments mat-body-medium">
+    <p>
+      Usando signal la rilevazione OnPush funziona anche in questo caso senza
+      problemi!
+    </p>
+    <p>
+      Ricordiamo per inciso che un evento qualsiasi nel componente attiva il
+      rilevamento e quindi aggiorna le proprietà del componente se presenti nel
+      template.
+    </p>
+  </div>
+</div>

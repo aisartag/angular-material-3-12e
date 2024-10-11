@@ -51,6 +51,14 @@ export const routes: Routes = [
   },
 
   {
+    path: 'pokemon-single',
+    loadComponent: () =>
+      import(
+        './features/change-detection/pokemon-single/pokemon-single.component'
+      ).then((c) => c.PokemonSingleComponent),
+  },
+
+  {
     path: 'signals-intro',
     loadComponent: () =>
       import('./features/signals/signals-intro/signals-intro.component').then(

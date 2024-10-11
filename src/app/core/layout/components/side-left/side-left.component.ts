@@ -16,6 +16,7 @@ export class SideLeftComponent {
   linksDetection: Link[] = [
     { routerLink: 'cd-intro', title: 'Introduzione' },
     { routerLink: 'pokemons', title: 'Pokemons' },
+    { routerLink: 'pokemon-single', title: 'Pokemon Single' },
   ];
 
   linksSignal: Link[] = [

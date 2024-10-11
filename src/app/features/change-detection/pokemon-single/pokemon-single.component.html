@@ -1,0 +1,62 @@
+<div class="container">
+  <h1 class="mat-headline-medium">Nome pokemon nel componente figlio</h1>
+  <form [formGroup]="pokemonForm" novalidate (ngSubmit)="onSubmit()">
+    <mat-card class="shipping-card">
+      <mat-card-header>
+        <mat-card-title>Cambia Pokemon</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="row">
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Nome</mat-label>
+              <input matInput formControlName="name" />
+              @if (pokemonForm.controls['name'].hasError('required')) {
+              <mat-error>Nome <strong>obbligatorio</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+          <div class="col">
+            <mat-form-field class="full-width">
+              <mat-label>Seleziona Tipo</mat-label>
+              <mat-select formControlName="tipo">
+                @for (tipo of tipi; track tipo) {
+                <mat-option [value]="tipo">{{ tipo }}</mat-option>
+                }
+              </mat-select>
+              @if (pokemonForm.controls['tipo'].hasError('required')) {
+              <mat-error>Tipo <strong>obbligatorio</strong></mat-error>
+              }
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit">Submit</button>
+      </mat-card-actions>
+    </mat-card>
+  </form>
+
+  <mat-tab-group dynamicHeight>
+    <mat-tab label="Mutable"
+      ><app-pokemon-mutable [pokemon]="pokemon" (subscribe)="subscribe($event)"
+    /></mat-tab>
+    <mat-tab label="Immutable"
+      ><app-pokemon-immutable
+        [pokemon]="pokemonService.pokemon$ | async"
+        (subscribe)="subscribe($event)"
+    /></mat-tab>
+    <mat-tab label="Observable"
+      ><app-pokemon-observable
+        [pokemon$]="pokemonService.pokemon$"
+        (subscribe)="subscribe($event)"
+      />
+    </mat-tab>
+    <mat-tab label="Signal"
+      ><app-pokemon-signal
+        [pokemon]="pokemonService.pokemon()"
+        (subscribe)="subscribe($event)"
+      />
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MIN_WIDTH_SCREEN } from '../../../shared/utils/constants';
 import { patchState, signalState } from '@ngrx/signals';
+import { MatTabsModule } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-signals-intro',
@@ -28,6 +29,7 @@ import { patchState, signalState } from '@ngrx/signals';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
+    MatTabsModule,
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

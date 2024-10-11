@@ -13,10 +13,12 @@
       <input
         matInput
         #input
-        (keyup.enter)="sottoscrivi(input.value); input.value = ''"
+        (keyup.enter)="onSubscribe(input.value); input.value = ''"
       />
       <mat-hint>Iscriviti al campionato</mat-hint>
     </mat-form-field>
+
+    <button mat-raised-button (click)="refresh()">Refresh Manuale</button>
   </div>
 
   <mat-divider />
@@ -25,9 +27,9 @@
     <p>
       Il rilevatore dei cambiamenti "OnPush" non si attiva la lista nel parent è
       stata aggiornata col metodo push che non modifica il riferimento all'array
-      di input. L'attivazione del rilevatore può avvenire o inviando un evento
-      al parent (iscrizione al campionato) o utilizzando detectChanges di
-      ChangeDetectorRef.
+      di input. L'attivazione del rilevatore può avvenire o semplicemente
+      interagendo col componente (esempio focus nell'input email) o utilizzando
+      detectChanges di ChangeDetectorRef.
     </p>
   </div>
 </div>

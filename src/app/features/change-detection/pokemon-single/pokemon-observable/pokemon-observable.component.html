@@ -1,0 +1,34 @@
+<div class="container">
+  <p>
+    Hello <b>{{ (pokemon$() | async)?.name }}</b
+    >, iscriviti alle newsletters inviando la tua email:
+  </p>
+
+  <div class="area-subscribe">
+    <mat-form-field>
+      <mat-label>Digita email</mat-label>
+      <input matInput #email type="email" name="email" />
+    </mat-form-field>
+
+    <button mat-raised-button (click)="subscribeToNewsletter(email.value)">
+      Sottoscrivi newsletters
+    </button>
+  </div>
+
+  <mat-divider />
+
+  <div class="comments mat-body-medium">
+    <p>
+      Qui l'oggetto passato in input è l'osservabile su pokemon ed il suo
+      riferimento rimane invariato durante tutto il ciclo di vita del ramo. La
+      coppia Osservabile async è magica e fa eccezione!
+    </p>
+    <p>Si consiglia la lettura di questo post:</p>
+    <p>
+      <a
+        href="https://medium.com/caravan-blog/make-your-angular-reactive-onpush-change-detection-powered-with-async-pipe-d7a6b2018d90"
+        >OnPush change detection powered with async pipe</a
+      >
+    </p>
+  </div>
+</div>

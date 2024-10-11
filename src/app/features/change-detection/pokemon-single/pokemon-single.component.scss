@@ -1,0 +1,17 @@
+.container {
+  max-width: 640px;
+  text-align: center;
+  margin: 0 auto;
+
+  form {
+    // border: 1px solid blue;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  mat-tab-group {
+    margin-top: 1.5rem;
+  }
+}

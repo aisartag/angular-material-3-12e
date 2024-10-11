@@ -28,6 +28,9 @@
   @include mat.card-theme(themes.$my-app-theme);
   @include mat.snack-bar-theme(themes.$my-app-theme);
 
+  @include mat.tabs-theme(themes.$my-app-theme);
+  @include mat.select-theme(themes.$my-app-theme);
+
   @include mat.typography-hierarchy(themes.$my-app-theme);
 
   @include mat.system-level-colors(themes.$my-app-theme);

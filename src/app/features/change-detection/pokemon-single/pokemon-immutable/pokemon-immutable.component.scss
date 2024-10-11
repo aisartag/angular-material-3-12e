@@ -1,0 +1,23 @@
+.container {
+  //   border: 1px solid black;
+  width: 90%;
+  margin: 1.5rem auto;
+
+  .area-subscribe {
+    // border: 1px solid red;
+
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+
+    @media (min-width: 599px) {
+      flex-flow: row;
+      justify-content: space-around;
+    }
+
+    mat-form-field {
+      min-width: 256px;
+    }
+  }
+}
