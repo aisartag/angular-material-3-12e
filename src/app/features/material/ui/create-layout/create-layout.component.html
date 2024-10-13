@@ -1,0 +1,146 @@
+<div class="container">
+  <h3 class="mat-headline-small">Generazione del layout</h3>
+
+  <p>
+    L'installazione di &#064;angular/material aggiunge il pacchetto
+    &#064;angular/cdk.Il Component Dev Kit (CDK) è un set di primitive di
+    comportamento per la creazione di componenti UI.
+  </p>
+  <p>Sono disponibili i seguenti schemi;</p>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+              The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- nome Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef>Nome</th>
+      <td mat-cell *matCellDef="let element">
+        &#123;&#123; element.nome &#125;&#125;
+      </td>
+    </ng-container>
+
+    <!--  descrizione Column -->
+    <ng-container matColumnDef="descrizione">
+      <th mat-header-cell *matHeaderCellDef>Descrizione</th>
+      <td mat-cell *matCellDef="let element">
+        &#123;&#123; element.descrizione &#125;&#125;
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <br />
+  <p>
+    Utilizzeremo lo schema 'layout' per generare il nostro layout. La forma del
+    comendo è:
+  </p>
+  <mat-card appearance="outlined">
+    ng generate &#064;angular/material:address-form [component-name]
+  </mat-card>
+  <br />
+  <p>Lanciamo il comando:</p>
+  <p>> ng generate &#064;angular/material:navigation core/layout/sidenav</p>
+  <p>creerà il componente sidenav nella posizione src/app/core/layout</p>
+  <p>
+    ...e ci siamo quasi...andiamo in app.component.html e aggiungiamo questo
+    frammento dopo aver cancellato tutto:
+  </p>
+  <mat-card appearance="outlined">
+    <pre><code>
+      &lt;app-sidenav>
+        &lt;router-outlet />
+      &lt;/app-sidenav>
+     </code></pre>
+  </mat-card>
+  <br />
+  <p>
+    che indica la necessità di un posto ng-content ove fare il
+    <em>content projection</em> di router-outlet
+  </p>
+  <p>
+    Lanciamo l'app, attiviamo devtools (F12) e facciamo scorrere la larghezza
+    della finestra. Osserviamo uno strano comportamento: il menù laterale passa
+    da 'dialog' a 'side' in due punti diversi (959px e 599px ). Ciò è dovuto al
+    fatto che il breakpoint Handset ha due posizioni Portrait e Landscape.
+  </p>
+  <p>
+    Consulta la pagina:
+    <a mat-button href="https://material.angular.io/cdk/layout/overview"
+      >BreakpointObserver</a
+    >
+    che suggerisce di limitarci al breakpoint HandsetPortrait( 599.98px) oppure
+    scegliere un valore personalizzato (per esempio '(max-width: 767px)' ). Per
+    inciso da analizzare comportamento su breakpoints min-width.
+  </p>
+
+  <p>
+    La cosa importante da fare è trovare la posizione per &lt;ng-content /> su
+    cui viene proiettato il routing principale dell'app. Nel sidenav generato la
+    posizione suggerita è indicata dal commento
+    <b>&lt;!-- Add Content Here --></b>
+  </p>
+  <p>
+    <b
+      >ATTN! Non dimentichiamo di aggiungere in :root di src/styles.scss i mixin
+      theme dei componenti aggiunti da sidenav e in src/styles/themes/dark.scss
+      i mixin color degli stessi.</b
+    >
+  </p>
+  <p>
+    Ora per provvedere <em>all'aggiustamento dello stile</em> in sidenav creiamo
+    una pagina welcome ed impostiamo il routing.
+  </p>
+  <p>Il nostro obiettivo è che che il content riempia tutto il viewport!</p>
+  <br />
+  <mat-card appearance="outlined">
+    <pre><code>
+  > ng g c features/welcome
+  > ng g c features/not-found
+
+  in app/app-routes-ts
+  export const routes: Routes = [
+  &#123; path: '', redirectTo: 'welcome', pathMatch: 'full' &#125;,
+  &#123; path: 'welcome', component: WelcomeComponent &#125;,
+
+  &#123; path: '**', component: NotFoundComponent &#125;,
+  ];
+    </code></pre>
+  </mat-card>
+  <br /><br />
+  <p>Se rilanciamo l'app non abbiamo nessun effetto!</p>
+  <p>
+    L'app.component ha proiettato il routing in app-sidenav ove non abbiamo
+    ancora posizionato ng-content; facciamolo proprio sotto
+    <b>&lt;!-- Add Content Here --></b>
+  </p>
+  <p>Il messaggio welcome works! dovrebbe apparire sullo schermo.</p>
+  <p>In src/styles.scss aggiungiamo:</p>
+  <mat-card appearance="outlined">
+    <pre><code>
+  * &#123;
+    box-sizing:border-box;
+  &#125;
+    </code></pre>
+  </mat-card>
+  <br />
+  <p>
+    Semplcemente le dimensioni di tutti i box dell'app comprendono padding e
+    border.
+  </p>
+  <p>
+    Vogliamo che lo spazio content di sidenav occupi l'intera pagina. Creeremo
+    una struttura del tipo:
+  </p>
+  <mat-card appearance="outlined">
+    <pre><code>
+   &lt;!-- Add Content Here -->
+   &lt;div class="sidenav-scroll-wrapper">
+    &lt;div class="sidenav-content">
+      &lt;ng-content />
+    &lt;/div>
+  &lt;/div>
+    </code></pre>
+  </mat-card>
+</div>

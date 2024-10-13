@@ -1,0 +1,22 @@
+.container {
+  table {
+    width: 90%;
+  }
+
+  .mat-mdc-table {
+    min-width: 80%;
+    margin: 0 auto;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  mat-card {
+    padding: 0.5rem;
+  }
+}

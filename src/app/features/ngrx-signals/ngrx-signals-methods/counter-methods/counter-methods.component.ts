@@ -1,11 +1,13 @@
 import { Component, inject } from '@angular/core';
 import { CounterStore } from '../counter.store';
 import { MatButton } from '@angular/material/button';
+import { MatDivider } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
   selector: 'app-counter-methods',
   standalone: true,
-  imports: [MatButton],
+  imports: [MatButton, MatDivider, MatCardModule],
   templateUrl: './counter-methods.component.html',
   styleUrl: './counter-methods.component.scss',
   providers: [CounterStore],

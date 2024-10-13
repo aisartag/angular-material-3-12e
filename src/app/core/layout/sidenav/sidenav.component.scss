@@ -26,15 +26,14 @@
     }
 
     .sidenav-scroll-wrapper {
-      height: calc(100dvh - 64px - 16px);
-      // border: 2px solid red;
+      height: calc(100dvh - 64px);
+      border: 2px solid red;
       overflow: auto;
 
       .sidenav-content {
         height: 100%;
         overflow-y: auto;
-        padding: 16px;
-        box-sizing: border-box;
+        padding: 2rem;
 
         @media (pointer: fine) {
           &::-webkit-scrollbar {

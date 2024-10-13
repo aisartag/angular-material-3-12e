@@ -1,9 +1,56 @@
 <div class="container">
   <h1 class="mat-headline-medium">Counter withMethods</h1>
   <div class="area-store">
-    <button mat-stroked-button (click)="store.increment()" disable>
+    <button mat-raised-button (click)="store.increment()" disabled>
       Increment
     </button>
-    <span>Count: {{ store.count() }}</span>
+    <span>Count: &#123;&#123; store.count() &#125;&#125;</span>
   </div>
+  <mat-divider />
+  <div class="comments mat-body-medium">
+    <p>
+      In questo esempio vengono introdotti altri due parametri oltre
+      <b>withState</b> nella funzione <b>signalStore</b> :
+      <b>withMethods e withHooks</b>
+    </p>
+    <p>
+      withMethods è il contenitore ove codificare i metodi per la modifica degli
+      stati e determinante è la funzione <b>patchState</b> che
+      &#064;ngrx/signals tradurrà nell'uso delle funzioni native set ed update
+    </p>
+    <p>
+      withHooks è l'altro contenitore dotato di due metodi onInit e onDestroy.
+      onInit viene esguito all'inizio e onDestroy alla fine del ciclo di vita
+      dello store.
+    </p>
+  </div>
+
+  <mat-card appearance="outlined">
+    <mat-card-content>
+      <p>counter.store.ts</p>
+      <pre><code>
+export const CounterStore = signalStore(
+  withState(&#123; count: 0 &#125;),
+  withMethods((store) => (&#123;
+    increment(): void &#123;
+      patchState(store, (state) => (&#123; count: state.count + 1 &#125;));
+    &#125;,
+  &#125;)),
+  withHooks(&#123;
+    onInit(store) &#123;
+      // incrementa count ogni 2 secondi
+      interval(2_000)
+        // unsubscribe automatico quando lo store è distrutto
+        .pipe(takeUntilDestroyed())
+        .subscribe(() => store.increment());
+    &#125;,
+    onDestroy(store) &#123;
+      console.log('count onDestroy', store.count());
+    &#125;,
+  &#125;)
+);
+
+    </code></pre>
+    </mat-card-content>
+  </mat-card>
 </div>

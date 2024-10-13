@@ -82,27 +82,19 @@ export const routes: Routes = [
       ).then((c) => c.CounterMethodsComponent),
   },
 
-  // {
-  //   path: 'todos-list',
-  //   loadComponent: () =>
-  //     import('./features/todos/todos-list/todos-list.component').then(
-  //       (c) => c.TodosListComponent
-  //     ),
-  // },
-
-  // {
-  //   path: 'todos-list-http',
-  //   loadComponent: () =>
-  //     import(
-  //       './features/todos-http/todos-list-http/todos-list-http.component'
-  //     ).then((c) => c.TodosListHttpComponent),
-  // },
-
   {
     path: 'things',
     loadComponent: () =>
       import('./features/things/things.component').then(
         (c) => c.ThingsComponent
+      ),
+  },
+
+  {
+    path: 'material-intro',
+    loadComponent: () =>
+      import('./features/material/material-info/material-info.component').then(
+        (c) => c.MaterialInfoComponent
       ),
   },
 

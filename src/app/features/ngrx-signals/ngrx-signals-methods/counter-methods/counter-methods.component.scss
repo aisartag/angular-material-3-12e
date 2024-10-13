@@ -10,6 +10,7 @@
     align-items: center;
 
     .area-store {
+      padding: 1.5rem;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -18,6 +19,14 @@
       span {
         font: var(--sys-headline-large);
       }
+    }
+
+    mat-divider {
+      margin-block: 1rem;
+    }
+
+    .comments {
+      text-align: left;
     }
   }
 }

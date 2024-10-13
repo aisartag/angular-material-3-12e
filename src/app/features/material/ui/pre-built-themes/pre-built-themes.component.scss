@@ -1,0 +1,27 @@
+.container {
+  // max-width: 768px;
+  // border: 1px solid blue;
+  // text-align: left;
+  // margin: 0 auto;
+
+  table {
+    width: 90%;
+  }
+
+  .mat-mdc-table {
+    min-width: 80%;
+    margin: 0 auto;
+  }
+
+  a {
+    text-decoration: underline;
+  }
+
+  ul {
+    list-style: none;
+  }
+
+  mat-card {
+    padding: 0.5rem;
+  }
+}

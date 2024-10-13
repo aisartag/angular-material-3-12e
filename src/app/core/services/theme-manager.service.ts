@@ -5,7 +5,7 @@ import { BrowserStorageService } from './browser-storage.service';
 //se utilizzo di rxjs
 // import { BehaviorSubject } from 'rxjs';
 
-const LOCAL_STORAGE_KEY = 'my-app';
+const LOCAL_STORAGE_KEY = 'angular-material-3-12e';
 
 // ATTN!!! il nome deve corrispondere al bundleName
 // {

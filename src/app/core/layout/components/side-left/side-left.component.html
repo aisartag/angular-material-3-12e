@@ -30,12 +30,10 @@
 
   <h1 class="title-group">Material</h1>
   <mat-nav-list>
-    <a mat-list-item routerLink="todos-list"><span>Color picker</span></a>
-
-    <a mat-list-item><span>Link 12</span></a>
-
-    <a mat-list-item><span>Link 13</span></a>
-
-    <a mat-list-item><span>Link 14</span></a>
+    @for(link of linksMaterial; track link.routerLink ){
+    <a mat-list-item [routerLink]="link.routerLink"
+      ><span>{{ link.title }}</span></a
+    >
+    }
   </mat-nav-list>
 </div>

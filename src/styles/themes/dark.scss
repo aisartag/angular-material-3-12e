@@ -14,16 +14,18 @@
   @include mat.list-color(themes.$my-app-dark-theme);
   @include mat.divider-color(themes.$my-app-dark-theme);
 
-  @include mat.button-toggle-theme(themes.$my-app-dark-theme);
-  @include mat.progress-spinner-theme(themes.$my-app-dark-theme);
+  @include mat.button-toggle-color(themes.$my-app-dark-theme);
+  @include mat.progress-spinner-color(themes.$my-app-dark-theme);
 
-  @include mat.dialog-theme(themes.$my-app-dark-theme);
-  @include mat.grid-list-theme(themes.$my-app-dark-theme);
-  @include mat.card-theme(themes.$my-app-dark-theme);
-  @include mat.snack-bar-theme(themes.$my-app-dark-theme);
+  @include mat.dialog-color(themes.$my-app-dark-theme);
+  @include mat.grid-list-color(themes.$my-app-dark-theme);
+  @include mat.card-color(themes.$my-app-dark-theme);
+  @include mat.snack-bar-color(themes.$my-app-dark-theme);
 
-  @include mat.tabs-theme(themes.$my-app-theme);
-  @include mat.select-theme(themes.$my-app-theme);
+  @include mat.tabs-color(themes.$my-app-dark-theme);
+  @include mat.select-color(themes.$my-app-dark-theme);
+
+  @include mat.table-color(themes.$my-app-dark-theme);
 
   @include mat.typography-hierarchy(themes.$my-app-dark-theme);
 

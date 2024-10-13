@@ -1,0 +1,634 @@
+<div class="container">
+  <h1 class="mat-headline-medium">Angular Material</h1>
+
+  <div class="content mat-body-medium">
+    <p>
+      Angular Material è un'implementazione di
+      <a mat-button href="https://m3.material.io/">Google Material Design</a>
+      in Angular. Si tratta quindi di una libreria di componenti
+      dell'interfaccia utente (UI) per gli sviluppatori che usano Angular.
+    </p>
+
+    <p>
+      Per qualche informazione più dettagliata vedi
+      <a
+        mat-button
+        href="https://www.grafigata.com/material-design/#:~:text=Il%20material%20design%20%C3%A8%20uno,stessi%20principi%20di%20esteriorit%C3%A0%20grafica."
+        >Che cos’è il material design</a
+      >
+    </p>
+
+    <br />
+
+    <h3 class="mat-headline-small">Sistema di temi di Angular Material</h3>
+    <p>
+      Il sistema di temi di Angular Material consente di personalizzare stili di
+      base, colore, tipografia e densità per i componenti nella tua
+      applicazione. Il sistema di temi si basa sulla specifica
+      <a mat-button href="https://m3.material.io/"> Material Design 3</a>
+      di Google , che è l'ultima iterazione del sistema di progettazione open
+      source di Google, Material Design.
+    </p>
+
+    <br />
+    <h3 class="mat-headline-small">Nozioni di base SASS</h3>
+    <p>
+      Le API di tematizzazione di Angular Material sono realizzate con Sass.
+      Questo documento presuppone familiarità con le basi di CSS e Sass, tra cui
+      variabili, funzioni e mixin.
+    </p>
+
+    <br />
+    <h3 class="mat-headline-small">Rinnovo Palette e Tipografia</h3>
+    <p>
+      Angular nel corso dell'anno (2024) è passata da Material 2 a Material 3 e
+      rinnovato i temi predefiniti.
+    </p>
+
+    <br />
+    <h3 class="mat-headline-small">Le 4 dimensioni tematiche</h3>
+    <ul>
+      <li>
+        <h4 class="mat-body-large"><b>Base</b></h4>
+        <p>
+          Stili di base comuni per il sistema di progettazione. Indipendenti da
+          colori,tipografia e densità. Mixin che riguardano stili strutturali
+          quali i border.
+          <em
+            >Devono pertanto essere inclusi una sola volta nell'applicazione</em
+          >. Ogni componente ha il suo mixin di base (Ad esempio, &#064;include
+          mat.checkbox-base($theme))
+        </p>
+      </li>
+
+      <li>
+        <h4 class="mat-body-large"><b>Colore</b></h4>
+        <p>
+          Stili correlati al colore e devono essere inclusi almeno una volta
+          nell'app.
+          <em
+            >Possono essere inclusi più volte (ad esempio l'app include temi
+            chiari e scuri</em
+          >. Ogni componente ha il suo mixin di colore (Ad esempio,
+          &#064;include mat.checkbox-color($theme))
+        </p>
+      </li>
+
+      <li>
+        <h4 class="mat-body-large"><b>Tipografia</b></h4>
+        <p>
+          Stili correlati ai font colore e devono essere inclusi almeno una
+          volta nell'app.
+          <em
+            >Possono essere inclusi più volte (ad esempio l'app supporta la
+            lettura di contenuti in unfont serif o sans-serif</em
+          >. Ogni componente ha il suo mixin tipografico (Ad esempio,
+          &#064;include mat.checkbox-typography($theme))
+        </p>
+      </li>
+
+      <li>
+        <h4 class="mat-body-large"><b>Densità</b></h4>
+        <p>
+          Stili correlati alla dimensione ed alla spaziatura e devono essere
+          inclusi almeno una volta nell'app.
+          <em
+            >Possono essere inclusi più volte (ad esempio l'app supporta sia la
+            modalità normale che compatta</em
+          >. Ogni componente ha il suo mixindi densità (Ad esempio,
+          &#064;include mat.checkbox-density($theme))
+        </p>
+      </li>
+    </ul>
+
+    <br />
+    <h3 class="mat-headline-small">Mix di temi</h3>
+    <p>
+      Tutti i componenti supportano anche un mixin di temi che può essere
+      utilizzato per includere contemporaneamente gli stili del componente per
+      tutte le dimensioni del tema. (Ad esempio, &#064;include
+      mat.checkbox-theme($theme)). L'approccio consigliato è quello di affidarsi
+      ai <em>theme mixin</em> per definire gli stili di base e, se necessario,
+      utilizzare i mixin monodimensionali per sovrascrivere aspetti particolari
+      di parti dell'app.
+    </p>
+
+    <br />
+    <h3 class="mat-headline-small">Creazione di un progetto</h3>
+    <p>
+      Apriamo una sessione terminale ed accertiamoci che &#064;angular/cli sia
+      installato globalmente e che sia la versione più recente. Possiamo farlo
+      con uno dei comandi
+    </p>
+    <ul>
+      <li>npm -g list</li>
+      <li>ng version</li>
+    </ul>
+    <p>
+      Se &#064;angular/cli non è installato o se la versione non è la più
+      recente eseguire il comando
+    </p>
+    <mat-card appearance="outlined">
+      > npm -g install &#064;angular/cli
+    </mat-card>
+    <br />
+    <p>
+      Il package manager predefinito di angular sembra essere yarn quindi
+      provvedere ad installarlo
+    </p>
+    <mat-card appearance="outlined"> > npm -g install yarn </mat-card>
+    <br />
+    <p>
+      Se si preferisc la versione moderna di npm che si chiama pnpm installarla
+    </p>
+    <mat-card appearance="outlined"> > npm -g install pnpm </mat-card>
+    <br />
+    <p>In tal caso è possibile associarla ad angular</p>
+    <mat-card appearance="outlined">
+      > ng config --global cli.packageManager pnpm
+    </mat-card>
+    <br />
+
+    <ol>
+      <li>
+        Successivamente, crea un nuovo progetto Angular con SCSS, framework
+        senza test (omettiamo --standalone che nelle versioni recenti è true di
+        default ed aggiungiamo --package-manager=nome-gestore se diverso dal
+        predefinito di angular). Ricordiamo che --skip-tests salta la creazione
+        dei files di specifica per il test e quindi non dovrebbe essere
+        utilizzato in fase di produzione:
+        <mat-card appearance="outlined">
+          > ng new angular-course-m3 -style=scss --defaults --skip-tests
+        </mat-card>
+        <br />
+      </li>
+
+      <li>Rimuovi tutto il contenuto da src/app/app.component.html</li>
+      <li>
+        Utilizza lo schema di installazione di Angular CLI per configurare il
+        tuo progetto Angular Material eseguendo il seguente comando:
+        <mat-card appearance="outlined">
+          > ng add &#064;angular/material
+          <br />
+          <p>
+            ? Choose a prebuilt theme name, or "custom" for a custom theme: (Use
+            arrow keys)
+          </p>
+          <ul>
+            <li>❯ Azure/Blue</li>
+            <li>Rose/Red</li>
+            <li>Magenta/Violet</li>
+            <li>Cyan/Orange</li>
+            <li>Custom</li>
+          </ul>
+          <p>Scegliere <b>Custom</b></p>
+
+          <br />
+          <p>? Set up global Angular Material typography styles?</p>
+          <p>Scegliere <b>y (Sì)</b></p>
+
+          <br />
+          <p>? Include the Angular animations module?</p>
+          <p>Scegliere <b>Include and enable animations</b></p>
+        </mat-card>
+        <br />
+      </li>
+    </ol>
+
+    <app-pre-built-themes />
+
+    <br />
+    <br />
+
+    <h3 class="mat-headline-small">
+      Stato dell'app dopo l'installazione <b>custom</b>
+    </h3>
+    <p>E' intervenuta nei seguenti file</p>
+    <ul>
+      <li>
+        <b>src/app.config.ts</b>
+        <p>
+          Dando un'occhiata a questo file nella configurazione osserviamo la
+          lista providers. Contien le funzionalità di base prima inserite nei
+          moduli. E qui la nostra installazione di material ha inserito il
+          provider di animazione provideAnimationsAsync()
+        </p>
+      </li>
+      <li>
+        <b>src/index.html</b>
+        <p>
+          In index.html l'installazione di material ha inserito i link alle font
+          googlr Roboto. Nel body è stata aggiunta la class mat-typography
+          secondo la nostra scelta dell'uso della tipografia globalmente
+        </p>
+      </li>
+      <li>
+        <b>src/style.scss</b>
+        <mat-card appearance="outlined">
+          <pre><code>
+    &#064;use '&#064;angular/material' as mat;
+    
+    &#064;include mat.core();
+    
+    $angular-course-m3-theme: mat.define-theme((
+      color: (
+        theme-type: light,
+        primary: mat.$azure-palette,
+        tertiary: mat.$blue-palette,
+      ),
+      density: (
+        scale: 0,
+      )
+    ));
+    
+     :root &#123;
+      &#064;include mat.all-component-themes($angular-course-m3-theme);
+    &#125;
+    
+    
+    html, body &#123; height: 100%; &#125;
+    body &#123; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; &#125;
+    
+          </code></pre>
+        </mat-card>
+        <br />
+      </li>
+    </ul>
+
+    <br />
+    <h3 class="mat-headline-small">Creazione di un tema personalizzato</h3>
+
+    <br />
+
+    <h3 class="mat-headline-small">Il "mixin" core</h3>
+
+    <mat-card appearance="outlined">
+      <p>&#064;include mat.core();</p>
+    </mat-card>
+    <p>
+      La prima cosa che noterai nel file del tema è il <b>mixin core</b>.
+      Angular Material definisce un mixin denominato core che include stili
+      prerequisiti per le funzionalità comuni utilizzate da più componenti, come
+      ripples , overlay , ecc.
+    </p>
+    <em>Deve essere incluso <b>una sola volta</b> nell'applicazione</em>
+    <br />
+    <br /><br />
+
+    <h3 class="mat-headline-small">Definizione di un tema</h3>
+    <mat-card appearance="outlined">
+      <pre><code>
+$angular-course-m3-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: mat.$azure-palette,
+    tertiary: mat.$blue-palette,
+  ),
+  density: (
+    scale: 0,
+  )
+));
+
+      </code></pre>
+    </mat-card>
+    <br />
+    <p>
+      La funzione di Angular Material <b>mat.define-theme()</b> crea un tema con
+      impostazioni predefinite. Per personalizzare l'aspetto della tua app, puoi
+      personalizzare colore, tipografia e densità fornendo un oggetto di
+      configurazione del tema a define-theme. L'oggetto di configurazione può
+      avere le seguenti proprietà.
+    </p>
+    <ul>
+      <li><b>color</b> [Facoltativo] Una mappa delle opzioni di colore</li>
+      <li>
+        <b>typography</b> [Facoltativo] Una mappa delle opzioni tipografiche
+      </li>
+      <li><b>density</b> [Facoltativo] Una mappa delle opzioni di densità</li>
+    </ul>
+    <br />
+    <p>
+      Ovvero tre delle quattro dimensioni sopra descritte ( manca base non
+      personalizzabile essendo un elemento strutturale)
+    </p>
+    <app-theme-property />
+    <br />
+    <p>
+      Esistono delle palette predefinite tra material design 2 (ancora
+      compayibile) e material design 3, ma il design di Material 3 è tutto
+      incentrato sulle personalizzazioni, quindi nella tua app vorrai che
+      vengano applicati i tuoi colori. Impareremo come creare la tua palette nei
+      prossimi articoli.
+    </p>
+    <br />
+
+    <h3 class="mat-headline-small">Applicazione di un tema ai componenti</h3>
+    <mat-card appearance="outlined">
+      <pre><code>
+        :root &#123; 
+          &#064;include mat.all-component-themes($angular-course-m3-theme);
+        &#125;
+      </code></pre>
+    </mat-card>
+    <br />
+    <p>
+      Angular Material offre un theme mixin che emette stili sia per il colore,
+      la tipografia e la densità, ed è proprio questo all-component-themes
+      mixin. Puoi controllare il file sorgente:
+      <b>src/material/core/theming/_all-theme.scss</b>
+      per vedere il mixin all-component-themes:
+    </p>
+    <p>
+      Inoltre, c'è un color mixin che emette tutti gli stili di colore dei
+      componenti, un typography mixin che emette tutti gli stili di tipografia
+      dei componenti e un density mixin che emette tutti gli stili di densità
+      dei componenti. Sono all-component-colors, all-component-typographi e
+      all-component-densities mixin.
+    </p>
+    <p>
+      Questi mixin emettono stili per tutti i 35+ componenti in Angular
+      Material. Ciò produrrà CSS non necessario, tranne quando la tua
+      applicazione utilizza ogni singolo componente dalla libreria.
+    </p>
+    <p>
+      Per evitare questo inconveniente vanno inseriti solo i mixin relativi ai
+      componenti effettivamente presenti nell'applicazione. Ogni volta che si
+      utilizza per la peima volta un componente si edita
+      src/material/core/theming/_all-theme.scss e si copa il nome del mixin
+      relativo:
+    </p>
+    <p>
+      Se ad esempio nella nostra applicazione sono presenti solo mat-button e
+      mat.icon si cancella il mixin all-component-themes e al suo posto oltre al
+      mixin core-theme i mixin relativi ai componenti affiunti.
+    </p>
+
+    <mat-card appearance="outlined">
+      <pre><code>
+        :root &#123; 
+        -  &#064;include mat.all-component-themes($angular-course-m3-theme);
+        +  &#064;include mat.core-theme($angular-course-m3-theme);
+        +  &#064;include mat.button-theme($angular-course-m3-theme);
+        +  &#064;include mat.icon-theme($angular-course-m3-theme);
+        &#125;
+      </code></pre>
+    </mat-card>
+    <br />
+    <p>
+      Per una migliore gestione del codice, sposteremo il codice relativo al
+      tema in styles/themes/_all.scss:
+    </p>
+
+    <mat-card appearance="outlined">
+      <p>//src/styles/themes/_all.scss</p>
+      <pre><code>
+        &#064;use "&#064;angular/material" as mat;
+
+        $angular-course-m3-theme: mat.define-theme(
+          (
+            color: (
+              theme-type: light,
+              primary: mat.$azure-palette,
+              tertiary: mat.$blue-palette,
+            ),
+            density: (
+              scale: 0,
+            ),
+          )
+        );
+        
+      </code></pre>
+    </mat-card>
+    <p>
+      **nota in sass.lang è deprecato &#064;import a favore di &#064;use che
+      richiede l'uso dell'alias
+    </p>
+
+    <br />
+    <br />
+    <p>Includiamolo ora in style.scss che diventa:</p>
+    <mat-card appearance="outlined">
+      <p>// src/styles.scss</p>
+      <pre><code>
+&#064;use '&#064;angular/material' as mat;
+&#064;use "./styles/themes/all" as themes;
+
+&#064;include mat.core();
+
+:root &#123;
+    &#064;include mat.core-theme(themes.$angular-course-m3-theme);
+    &#064;include mat.button-theme(themes.$angular-course-m3-theme);
+&#125;
+
+
+html, body &#123; height: 100%; &#125;
+body &#123; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; &#125;
+
+      </code></pre>
+    </mat-card>
+    <br />
+
+    <p>
+      Ed abbiamo seguito il suggerimento eliminando il mixin
+      _all_component_themes e inserendo il mixin (obbligatorio) core-theme e il
+      mixin button-theme che vogliamo gestire nella nostra applicazione
+    </p>
+
+    <p>
+      A questo punto andiamo in app.component.ts e in imports aggiungiamo
+      MatButtonModule (intellisense funziona male) e quindi tra gli import in
+      testa import &#123; MatButtonModule &#125; from
+      '&#064;angular/material/button';
+    </p>
+    <p>poi nel template app.component.html inserire</p>
+
+    <mat-card appearance="outlined">
+      <pre><code>
+&lt;button mat-button>Basic&lt;/button>
+&lt;button mat-raised-button>Raised&lt;/button>
+&lt;button mat-stroked-button>Stroked&lt;/button>
+&lt;button mat-flat-button>Flat&lt;/button>
+  
+  
+      </code></pre>
+    </mat-card>
+    <br />
+    <p>
+      E l'output dovrebbe apparire come segue( a parte i colori). Evidentemente
+      su questa macchina è presente un tema differente!
+    </p>
+    <div>
+      <button mat-button>Basic</button>
+      <button mat-raised-button>Raised</button>
+      <button mat-stroked-button>Stroked</button>
+      <button mat-flat-button>Flat</button>
+    </div>
+    <br /><br />
+
+    <app-create-layout />
+    <br /><br />
+
+    <h3 class="mat-headline-small">Creazione di un tema Dark</h3>
+    <p>
+      Andiamo nel file src/styles/themes/_all.scss e modifichiamolo come segue
+    </p>
+
+    <mat-card appearance="outlined">
+      <p>//src/styles/themes/_all.scss</p>
+      <pre><code>
+        &#064;use "&#064;angular/material" as mat;
+
+        $angular-course-m3-theme: mat.define-theme(
+          (
+            color: (
+              theme-type: light,
+              primary: mat.$azure-palette,
+              tertiary: mat.$blue-palette,
+            ),
+            density: (
+              scale: 0,
+            ),
+          )
+        );
+
+
+      +  $angular-course-m3-dark-theme: mat.define-theme(
+      +    (
+      +      color: (
+      +        theme-type: dark,
+      +        primary: mat.$magenta-palette,
+      +        tertiary: mat.$v-palette,
+      +      ),
+      +      density: (
+      +        scale: 0,
+      +      ),
+      +   )
+      +  );
+
+        
+      </code></pre>
+    </mat-card>
+
+    <br />
+    <p>
+      Infine, apporta le modifiche src/styles.scss per applicare il tema scuro
+      quando l'utente lo preferisce:
+    </p>
+
+    <mat-card appearance="outlined">
+      <p>// src/styles.scss</p>
+      <pre><code>
+&#064;use '&#064;angular/material' as mat;
+&#064;use "./styles/themes/all" as themes;
+
+&#064;include mat.core();
+
+:root &#123;
+    &#064;include mat.core-theme(themes.$angular-course-m3-theme);
+    &#064;include mat.button-theme(themes.$angular-course-m3-theme);
+&#125;
+
++&#064;media (prefers-color-scheme: dark) &#123;
++  :root &#123;
++      &#064;include mat.core-color(themes.$angular-course-m3-dark-theme);
++      &#064;include mat.button-color(themes.$angular-course-m3-dark-theme);
++  &#125;
++ &#125;
+
+
+html, body &#123; height: 100%; &#125;
+body &#123; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; &#125;
+
+      </code></pre>
+    </mat-card>
+    <br />
+    <br />
+    <p>
+      Effettua infine questa modifica in index.html affinché il body assuma il
+      tema dark
+    </p>
+
+    <mat-card appearance="outlined">
+      <pre><code>
+      - &lt;body class="mat-typography">
+      + &lt;body class="mat-typography mat-app-background">
+      +     &lt;app-root>&lt;/app-root>
+      + &lt;/body>
+    </code></pre>
+    </mat-card>
+
+    <br />
+    <p>A quesro punto il body assumera i colori relativi al tema attivo!</p>
+    <br /><br />
+
+    * * * * * * * * *
+
+    <br /><br /><br />
+    <h3 class="mat-headline-small">Backup del lavoro</h3>
+    <div>
+      Non procediamo se le cose vanno come previsto! Altrimenti:
+      <ul>
+        <li>Se si usa git fare commit e poi checkout su altro branch</li>
+        <li>
+          Oppure fare una copia di backup escludendo node_modules usando
+          robocopy
+        </li>
+      </ul>
+    </div>
+    <br /><br />
+    <h3 class="mat-headline-small">Temi multipli in file separati</h3>
+    <p>
+      Ora, invece di avere tutti i temi in un file, possiamo anche avere file
+      separati per ogni tema.
+    </p>
+    <p>
+      Vediamo come possiamo ottenerlo. Per prima cosa, crea un dark.scss file
+      nella cartella styles/themes con il seguente contenuto:
+    </p>
+    <mat-card appearance="outlined">
+      <p>//src/styles/themes/dark.scss</p>
+      <pre><code>
+&#064;use "&#064;angular/material" as mat;
+&#064;use "./all" as themes;
+
+.dark-theme &#123;;
+  &#064;include mat.core-color(themes.$angular-course-m3-dark-theme);
+  &#064;include mat.button-color(themes.$angular-course-m3-dark-theme);
+&#125;;
+      </code></pre>
+    </mat-card>
+    <br /><br />
+    <p>
+      Si noti che stiamo utilizzando un selettore di classe dark-theme per il
+      rendering del tema dark
+    </p>
+    <br /><br />
+    <h3 class="mat-headline-small">
+      Lazy load( caricamento ritardato) del tema dark
+    </h3>
+    <p>
+      Non vogliamo che dark-theme sia caricato con la nostra applicazione, ma
+      vogliamo che sia basata sulle preferenze dell'utente. Per prima cosa
+      escludiamola dal nostro bundle.
+    </p>
+    <p>
+      Per escludere dal bundle dark-theme, imposteremo inject come falsene
+      nell'array styles in angular.json
+    </p>
+
+    <mat-card appearance="outlined">
+      <pre><code>
+        "styles": [
+            -    "src/styles.scss"
+            +   "src/styles.scss", 
+            +   &#123; 
+            +        "bundleName": "dark-theme", 
+            +        "inject": false, 
+            +        "input": "src/styles/themes/dark.scss"
+            +   &#125;; 
+            ],
+      </code></pre>
+    </mat-card>
+    <br /><br />
+  </div>
+</div>

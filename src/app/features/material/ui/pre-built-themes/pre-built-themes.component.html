@@ -1,0 +1,104 @@
+<div class="container">
+  <h3 class="mat-headline-small">
+    Utilizzo di un tema predefinito (pre-built)
+  </h3>
+  <!-- <p>
+  Qualora invece di scegliere un tema personalizzato (custom) avessimo scelto un
+  tema predefinito (pre-built) selezionabile tra i quattro lo stato sell'app
+  risultante sarebbe stato il seguente:
+</p> -->
+  <p>
+    In Material 3 i temi predefiniti sono stati ridotti ai quattro sotto
+    elencati:
+  </p>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Css Column -->
+    <ng-container matColumnDef="css">
+      <th mat-header-cell *matHeaderCellDef>Tema</th>
+      <td mat-cell *matCellDef="let element">{{ element.css }}</td>
+    </ng-container>
+
+    <!-- lightOrdark Column -->
+    <ng-container matColumnDef="lightOrdark">
+      <th mat-header-cell *matHeaderCellDef>Light o Dark</th>
+      <td mat-cell *matCellDef="let element">{{ element.lightOrdark }}</td>
+    </ng-container>
+
+    <!--  colorPrimary Column -->
+    <ng-container matColumnDef="colorPrimary">
+      <th mat-header-cell *matHeaderCellDef>Color primary</th>
+      <td mat-cell *matCellDef="let element">{{ element.colorPrimary }}</td>
+    </ng-container>
+
+    <!-- colorTertiary Column -->
+    <ng-container matColumnDef="colorTertiary">
+      <th mat-header-cell *matHeaderCellDef>Color tertiary</th>
+      <td mat-cell *matCellDef="let element">{{ element.colorTertiary }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <br />
+  <h3 class="mat-headline-small">
+    Stato dell' applicazione dopo l'installazione di un pre-built
+  </h3>
+  <p>E' intervenuta nei seguenti file</p>
+  <ul>
+    <li>
+      <b>src/app.config.ts</b>
+      <p>
+        Dando un'occhiata a questo file nella configurazione osserviamo la lista
+        providers. Contien le funzionalità di base prima inserite nei moduli. E
+        qui la nostra installazione di material ha inserito il provider di
+        animazione provideAnimationsAsync()
+      </p>
+    </li>
+    <li>
+      <b>src/index.html</b>
+      <p>
+        In index.html l'installazione di material ha inserito i link alle font
+        googlr Roboto. Nel body è stata aggiunta la class mat-typography secondo
+        la nostra scelta dell'uso della tipografia globalmente
+      </p>
+    </li>
+    <li>
+      <b>angular.json</b>
+      <p>Ad esempio dopo aver scelto il tema azure-blue</p>
+      <mat-card appearance="outlined">
+        <pre><code>
+          "styles": [
+           "&#064;angular/material/prebuilt-themes/azure-blue.css",
+           // other styles ],
+        </code></pre>
+      </mat-card>
+      <p>
+        Questo file include il CSS per ogni componente nella libreria. Per
+        includere solo il CSS per un sottoinsieme di componenti, devi usare la
+        Sass API descritta in seguito.
+      </p>
+      <br />
+    </li>
+    <li>
+      <b>src/style.scss</b>
+      <mat-card appearance="outlined">
+        <pre><code>
+  html, body &#123; height: 100%; &#125;
+  body &#123; margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; &#125;
+        </code></pre>
+      </mat-card>
+      <br />
+    </li>
+  </ul>
+
+  <p>
+    L'installazione di un tema predefinito è pronta. Conosciamo a questo punto
+    le operazioni per ripristinare un tema predefinito ( consogliabile per chi
+    non vuole cimentarsi con sass!).
+  </p>
+</div>

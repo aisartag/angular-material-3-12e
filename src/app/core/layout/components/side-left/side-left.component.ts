@@ -20,12 +20,16 @@ export class SideLeftComponent {
   ];
 
   linksSignal: Link[] = [
-    { routerLink: 'signals-intro', title: 'Signals Intro' },
+    { routerLink: 'signals-intro', title: 'Introduzione' },
   ];
 
   linksNgrxSignals: Link[] = [
     { routerLink: 'ngrx-signals-intro', title: 'Introduzione' },
     { routerLink: 'ngrx-signals-methods', title: 'Store metodi/hooks' },
     { routerLink: 'things', title: 'Things' },
+  ];
+
+  linksMaterial: Link[] = [
+    { routerLink: 'material-intro', title: 'Introduzione' },
   ];
 }

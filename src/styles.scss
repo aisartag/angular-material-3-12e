@@ -30,6 +30,7 @@
 
   @include mat.tabs-theme(themes.$my-app-theme);
   @include mat.select-theme(themes.$my-app-theme);
+  @include mat.table-theme(themes.$my-app-theme);
 
   @include mat.typography-hierarchy(themes.$my-app-theme);
 
@@ -71,9 +72,18 @@ body {
 }
 body {
   margin: 0;
+  padding: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .pkm-overlay-blurred {
   backdrop-filter: blur(4px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
 }
